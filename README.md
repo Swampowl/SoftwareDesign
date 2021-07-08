@@ -1,3 +1,4 @@
 Hier entsteht die Endabgabe im Seminar Softwaredesign.
-added Main.ts
-@swampowl
+<br>added Main.ts
+<br>
+<br>@swampowl
