@@ -1,7 +1,7 @@
 import { initial } from "lodash";
 import ConsoleHandling from "./ConsoleHandling";
 import FileHandler from "./FileHandler";
-import { User } from "./User";
+import {UserManager } from "./UserManager";
 
 init();
 
@@ -9,6 +9,6 @@ init();
 
 
 function init() {
-    new User();
+    new UserManager();
 }
 

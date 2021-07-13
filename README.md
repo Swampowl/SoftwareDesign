@@ -4,4 +4,5 @@ Hier entsteht die Endabgabe im Seminar Softwaredesign.
 <br>addes diagrams folder
 <br>added login screen to user.ts
 <br>added package.json
+<br>added new classes
 <br>@swampowl
