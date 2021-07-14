@@ -40,7 +40,7 @@
 		"one-line": [true, "check-open-brace", "check-catch", "check-whitespace"],
 		"quotemark": [true, "double"],
 		"radix": false,
-		"semicolon": false,
+		"semicolon": true,
 		"switch-default": false,
 		"triple-equals": [false, "allow-null-check"],
 		"typedef": [true, "call-signature", "parameter", "property-declaration", "variable-declaration", "member-variable-declaration"],

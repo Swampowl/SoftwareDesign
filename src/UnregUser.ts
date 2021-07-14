@@ -22,7 +22,7 @@ export class UnregUser {
     }
 
 
-    private async startMenue(): Promise<void> {
+    private async startMenue() {
 
         ConsoleHandling.printInput("Please choose a activity:");
         let answer: string = await ConsoleHandling.showPossibilities(this.initalStartOptions, "Your Statement:");
@@ -74,7 +74,6 @@ export class UnregUser {
     }
 
     public async showOwnStatistics(): Promise<void> {
-
     }
 }
 
