@@ -26,7 +26,7 @@ export class UnregUser {
         let answer: string = await ConsoleHandling.showPossibilities(this.initalStartOptions, "Your Statement:");
 
         if (!this.isInstanceOfRegUser) {
-            if (answer == "4" || "5") {
+            if (answer == "4" || answer == "5") {
                 ConsoleHandling.printInput("please choose a siutable input.")
             }
         }
