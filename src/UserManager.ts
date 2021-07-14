@@ -17,13 +17,18 @@ export class UserManager {
 
     private async loginQuestion(): Promise<void> {
         console.log("Welcome to questionaire main menue.")
-        let answer: string = await ConsoleHandling.showPossibilities(["<L> Login", "<R> Register", "<G> Continue as guest"], "Hello User! What do you want to do? \nYour Statement:");
+        let answer: string = await ConsoleHandling.showPossibilities(["<L> Login", "<R> Register", "<G> Continue as guest"], "Your Statement:");
         console.log(answer);
 
         switch (answer.toUpperCase()) {
             case "L":
                 console.log("CASE L\n")
-                await this.login();
+                if (await this.isLoginCorrect()) {
+                    console.log("You are now logged in as registrated User.")
+                    new RegUser();
+                    return;
+                }
+
                 break;
             case "R":
                 console.log("CASE R\n")
@@ -42,18 +47,17 @@ export class UserManager {
 
     }
 
-    private async login(): Promise<void> {
+    private async isLoginCorrect(): Promise<boolean> {
         console.clear();
         ConsoleHandling.printInput("Please enter your login credentials to identify.")
         let usernameLogin: string = await ConsoleHandling.showPossibilities(["username:"], "");
         let passwordLogin: string = await ConsoleHandling.showPossibilities(["password:"], "");
-       if( this.isLoginCredentialsCorrect(usernameLogin, passwordLogin)){
-           console.log("Username and Password match.");
-           new RegUser();
+        if (this.isLoginCredentialsCorrect(usernameLogin, passwordLogin)) {
+            console.log("Username and Password match.");
+            return true;
+        }
 
-       }
-       
-        
+        return false;
     }
 
 
@@ -78,7 +82,7 @@ export class UserManager {
     }
 
     public isRegisterUsernameTaken(usernameRegister: string): boolean {
-        
+
         for (let loginCredential of this.loginDB) {
 
             if (loginCredential.username == usernameRegister) {
@@ -93,9 +97,10 @@ export class UserManager {
 
     private async register(): Promise<void> {
         console.clear();
-        ConsoleHandling.printInput("To register for Questionaire App,\nplease choose a username and password.\nkeep in mind that only numbers and letters are allowed")
+        ConsoleHandling.printInput("To register for Questionaire App\nplease choose a username and password.\nkeep in mind that only numbers and letters are allowed.")
         let usernameRegister: string = await ConsoleHandling.showPossibilities(["enter username here:"], "");
         if (this.isRegisterUsernameTaken(usernameRegister)) {
+            console.clear();
             console.log("Username already taken.");
             return;
 
@@ -120,7 +125,8 @@ export class UserManager {
         // console.log(JSON.stringify(this.loginDB));
         FileHandler.writeFile("loginDB.json", this.loginDB);
         //console.clear();
-        console.log("User was created. Returning to main menue.");
+        console.clear();
+        console.log("User " +usernameRegister +  " was created. Returning to main menue.");
     }
 
     /* private async createQuestionaire(){
@@ -143,7 +149,6 @@ export class UserManager {
  */
 
     private async guestContinue(): Promise<void> {
-        new UnregUser();
         return;
         console.clear();
         console.log("Welcome unregistrated user. Please choose an activity.")
