@@ -98,30 +98,23 @@ export class UserManager {
 
 
     private async register(): Promise<void> {
+
         console.clear();
         ConsoleHandling.printInput("To register for Questionaire App\nplease choose a username and password.\nkeep in mind that only numbers and letters are allowed.")
         let usernameRegister: string = await ConsoleHandling.showPossibilities(["enter username here:"], "");
+
         if (this.isRegisterUsernameTaken(usernameRegister)) {
             console.clear();
-            console.log("Username already taken.");
+            console.log('\x1b[31m', "Username already taken.", '\x1b[0m');
             return;
-
         }
-
 
         let passwordLogin: string = await ConsoleHandling.showPossibilities(["enter password here:"], "");
 
 
-
-        for (let index = 0; index <= this.loginDB.length - 1; index++) {
-            //       console.log(this.loginDB[index].username);
-
-        }
         let userID: number = this.loginDB.length;
 
-
-        // Auf Typescript gültigkeit überprüfen, eventull via tslint3
-        let loginData: LoginCredentials = new LoginCredentials(this.loginDB.length, usernameRegister, passwordLogin);
+        let loginData: LoginCredentials = new LoginCredentials(userID, usernameRegister, passwordLogin);
         this.loginDB.push(loginData);
         // console.log(this.loginDB);
         // console.log(JSON.stringify(this.loginDB));
