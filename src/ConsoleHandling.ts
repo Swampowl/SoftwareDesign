@@ -31,7 +31,7 @@ class ConsoleHandling {
 
       })
     });
-    
+
     if (answerPromise.toLocaleLowerCase() == "exit") {
       throw new Error("exit");
     }
@@ -39,9 +39,9 @@ class ConsoleHandling {
   }
 
   public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
-    this.consoleLine.write("\n")
-    this.consoleLine.write("Functions you can use: ");
-    this.consoleLine.write("\n\n");
+   
+    // this.consoleLine.write("Functions you can use: ");
+    this.consoleLine.write("\n");
     for (let possibility of showPossibilities) {
       this.consoleLine.write(possibility.toString());
       this.consoleLine.write("\n")
