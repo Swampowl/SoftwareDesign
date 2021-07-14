@@ -22,9 +22,9 @@ export class UserManager {
 
         switch (answer.toUpperCase()) {
             case "L":
-                console.log("CASE L\n")
+                console.clear();
                 if (await this.isLoginCorrect()) {
-                    console.log("You are now logged in as registrated User.")
+                    console.log('\x1b[32m', "You are now logged in as registrated User.", '\x1b[0m')
                     new RegUser();
                     return;
                 }
@@ -35,11 +35,13 @@ export class UserManager {
                 await this.register();
                 break;
             case "G":
-                console.log("CASE G\n")
+                console.clear()
+                console.log('\x1b[33m', "You now continue as unregistrated User.", '\x1b[0m')
                 new UnregUser();
                 return;
             default:
-                ConsoleHandling.printInput("please choose a siutable input.");
+                console.clear();
+                ConsoleHandling.printInput('\x1b[36mplease choose a siutable input.\x1b[0m');
                 break;
         }
 
@@ -126,7 +128,7 @@ export class UserManager {
         FileHandler.writeFile("loginDB.json", this.loginDB);
         //console.clear();
         console.clear();
-        console.log("User " +usernameRegister +  " was created. Returning to main menue.");
+        console.log('\x1b[36m', "User " + usernameRegister + " was created. Returning to main menue.", '\x1b[0m');
     }
 
     /* private async createQuestionaire(){
