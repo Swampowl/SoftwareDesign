@@ -54,12 +54,12 @@ export class UnregUser {
 
             case "4":
                 console.clear();
-                this.createQuestionarie();
+                this.showOwnStatistics();
                 break;
 
             case "5":
                 console.clear();
-                this.showOwnStatistics();
+                this.createQuestionarie();
                 break;
 
             default:
