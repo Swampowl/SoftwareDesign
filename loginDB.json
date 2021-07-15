@@ -1,1 +1,67 @@
-[{"userID":0,"username":"Flo","password":"Flo"},{"userID":1,"username":"Hans","password":"Hans"},{"userID":2,"username":"Tom","password":"Tom"},{"userID":3,"username":"swampowl","password":"swampowl"},{"userID":4,"username":"diter","password":"diter"},{"userID":5,"username":"olo","password":"olo"},{"userID":6,"username":"loko","password":"loko"},{"userID":7,"username":"lilo","password":"lilo"},{"userID":8,"username":"okoko","password":"okoko"},{"userID":9,"username":"hans","password":"hans"},{"userID":10,"username":"CalvinKing","password":"1234567890"},{"userID":11,"username":"Hallo","password":"1234"},{"userID":12,"username":"Hello","password":"1234"}]
+[
+    {
+        "userID": 0,
+        "username": "admin",
+        "password": "admin"
+    },
+    {
+        "userID": 1,
+        "username": "user",
+        "password": "user"
+    },
+    {
+        "userID": 2,
+        "username": "Testuser001",
+        "password": "Testuser001"
+    },
+    {
+        "userID": 3,
+        "username": "Testuser002",
+        "password": "Testuser002"
+    },
+    {
+        "userID": 4,
+        "username": "Testuser003",
+        "password": "Testuser003"
+    },
+    {
+        "userID": 5,
+        "username": "Testuser004",
+        "password": "Testuser004"
+    },
+    {
+        "userID": 6,
+        "username": "Testuser005",
+        "password": "Testuser005"
+    },
+    {
+        "userID": 7,
+        "username": "Testuser006",
+        "password": "Testuser006"
+    },
+    {
+        "userID": 8,
+        "username": "Testuser007",
+        "password": "Testuser007"
+    },
+    {
+        "userID": 9,
+        "username": "Testuser001",
+        "password": "Testuser001"
+    },
+    {
+        "userID": 10,
+        "username": "Testuser008",
+        "password": "Testuser008"
+    },
+    {
+        "userID": 11,
+        "username": "Testuser009",
+        "password": "Testuser009"
+    },
+    {
+        "userID": 12,
+        "username": "Testuser010",
+        "password": "Testuser010"
+    }
+]

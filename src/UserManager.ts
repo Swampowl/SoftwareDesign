@@ -4,6 +4,7 @@ import { LoginCredentials } from "./LoginCredentials";
 import FileHandler from "./FileHandler";
 import { PassThrough } from "stream";
 import { RegUser } from "./RegUser";
+import { DefaultDate } from "./DefaultDate";
 
 export class UserManager {
 
@@ -15,6 +16,11 @@ export class UserManager {
         this.loginQuestion();
     }
 
+    public async getDate(){
+        let dateString: string = await ConsoleHandling.question("please type in the date in the following format: DD.MM.YYYY:  ");
+        new DefaultDate(dateString);
+    }
+
     private async loginQuestion(): Promise<void> {
         console.log("Welcome to questionaire main menue.")
         let answer: string = await ConsoleHandling.showPossibilities(["<L> Login", "<R> Register", "<G> Continue as guest"], "Your Statement:");
@@ -22,7 +28,7 @@ export class UserManager {
 
         switch (answer.toUpperCase()) {
             case "L":
-                console.clear();
+                //console.clear();
                 if (await this.isLoginCorrect()) {
                     console.log('\x1b[32m', "You are now logged in as registrated User.", '\x1b[0m')
                     new RegUser();
@@ -40,7 +46,7 @@ export class UserManager {
                 new UnregUser();
                 return;
             default:
-                console.clear();
+                //console.clear();
                 ConsoleHandling.printInput('\x1b[36mplease choose a siutable input.\x1b[0m');
                 break;
         }
@@ -50,7 +56,7 @@ export class UserManager {
     }
 
     private async isLoginCorrect(): Promise<boolean> {
-        console.clear();
+        //console.clear();
         ConsoleHandling.printInput("Please enter your login credentials to identify.")
         let usernameLogin: string = await ConsoleHandling.showPossibilities(["username:"], "");
         let passwordLogin: string = await ConsoleHandling.showPossibilities(["password:"], "");
@@ -70,15 +76,15 @@ export class UserManager {
         for (let index = 0; index <= this.loginDB.length - 1; index++) {
 
             if (inputLoginCredentials.equals(this.loginDB[index])) {
-                console.clear();
+                //console.clear();
                 console.log("Login successful.")
                 return true;
             }
 
 
         }
-        console.clear();
-        console.log("password / username missmatch. cancel");
+        //console.clear();
+        console.log('\x1b[31m', "\nUsername and password do not match", '\x1b[0m', "\nreturning to main menue");
         return false;
 
     }
@@ -99,12 +105,12 @@ export class UserManager {
 
     private async register(): Promise<void> {
 
-        console.clear();
+        //console.clear();
         ConsoleHandling.printInput("To register for Questionaire App\nplease choose a username and password.\nkeep in mind that only numbers and letters are allowed.")
         let usernameRegister: string = await ConsoleHandling.showPossibilities(["enter username here:"], "");
 
         if (this.isRegisterUsernameTaken(usernameRegister)) {
-            console.clear();
+            //console.clear();
             console.log('\x1b[31m', "Username already taken.", '\x1b[0m');
             return;
         }
@@ -119,13 +125,13 @@ export class UserManager {
         // console.log(this.loginDB);
         // console.log(JSON.stringify(this.loginDB));
         FileHandler.writeFile("loginDB.json", this.loginDB);
+        ////console.clear();
         //console.clear();
-        console.clear();
         console.log('\x1b[36m', "User " + usernameRegister + " was created. Returning to main menue.", '\x1b[0m');
     }
 
     /* private async createQuestionaire(){
-         console.clear();
+         //console.clear();
          ConsoleHandling.printInput("Please name your Questionaire!")
          let questionaireTitle: string = await ConsoleHandling.showPossibilities(["Enter title here:"], "");
          ConsoleHandling.printInput("Please name your Questionaire!")
@@ -138,14 +144,14 @@ export class UserManager {
          // console.log(this.loginDB);
          // console.log(JSON.stringify(this.loginDB));
          FileHandler.writeFile("loginDB.json", this.loginDB);
-         console.clear();
+         //console.clear();
          console.log("User was created. Returning to main menue.");
      }
  */
 
     private async guestContinue(): Promise<void> {
         return;
-        console.clear();
+        //console.clear();
         console.log("Welcome unregistrated user. Please choose an activity.")
         let answer: string = await ConsoleHandling.showPossibilities(["<1> create a questionaire", "<2> seach questionaire by name", "<3> show questionaires", "<4> view statistics of own qurstioaires."], "What do you want to do? \nYour Statement:");
         console.log(answer);

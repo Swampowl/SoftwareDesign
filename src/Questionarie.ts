@@ -1,13 +1,31 @@
 import { Question } from "./Question";
-export class Questionarie extends Question {
+import { DefaultDate } from "./DefaultDate";
+export class Questionarie {
 
     public questionarieID: number;
     public title: string;
     public questionarieQuestions: [];
-    public sumOfQuestions: number;
+    public validStart: DefaultDate;
+    public validEnd: DefaultDate;
     public timesQuestionarieTaken: number;
-    public validStart: Date;
-    public validEnd: Date;
+
+
+  constructor(
+    questionarieID: number, 
+    title: string, 
+    questionarieQuestions: [], 
+    validStart: DefaultDate, 
+    validEnd: DefaultDate, 
+    timesQuestionarieTaken: number
+) {
+    this.questionarieID = questionarieID
+    this.title = title
+    this.questionarieQuestions = questionarieQuestions
+    this.validStart = validStart
+    this.validEnd = validEnd
+    this.timesQuestionarieTaken = timesQuestionarieTaken
+  }
+  
 
 
 }

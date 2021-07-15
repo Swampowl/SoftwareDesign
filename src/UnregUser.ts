@@ -8,7 +8,8 @@ export class UnregUser {
     public initalStartOptions: string[] = ["<1> show ten questionaries", "<2> search questionarie by name", "<3> show amount of taken questionaries and their names"];
     public isRegistratedUser: boolean;
 
-    constructor(additionalStartoptions?: string[]) {
+    constructor (additionalStartoptions?: string[]) {
+        
         if (additionalStartoptions) {
             this.initalStartOptions = this.initalStartOptions.concat(additionalStartoptions);
             //   console.log(this.initalStartOptions);
@@ -31,35 +32,34 @@ export class UnregUser {
         if (!this.isRegistratedUser) {
             if (+answer > 3) {
                 ConsoleHandling.printInput("Your input is not siutable!");
-                await this.startMenue();
+                await this.startMenue()
                 return;
             }
         }
 
         switch (answer) {
             case "1":
-                console.clear();
+                //console.clear();
                 console.log("CASE 1\n");
                 break;
 
             case "2":
-                console.clear();
+                //console.clear();
                 console.log("CASE 2\n");
                 break;
 
             case "3":
-                console.clear();
+                //console.clear();
                 console.log("CASE 3\n");
                 break;
 
             case "4":
-                console.clear();
-                this.showOwnStatistics();
+                //console.clear();
+                await this.showOwnStatistics();
                 break;
 
             case "5":
-                console.clear();
-                this.createQuestionarie();
+                await this.createQuestionarie();
                 break;
 
             default:
