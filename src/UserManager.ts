@@ -5,13 +5,16 @@ import FileHandler from "./FileHandler";
 import { PassThrough } from "stream";
 import { RegUser } from "./RegUser";
 import { DefaultDate } from "./DefaultDate";
+import { Questionarie } from "./Questionarie";
 
 export class UserManager {
 
 
     private loginDB: LoginCredentials[] = [];
+    public static questionaireDB: Questionarie[] = [];
 
     constructor() {
+        UserManager.questionaireDB = <Questionarie[]>FileHandler.readObjectFile("QuestionaireDB.json");
         this.loginDB = <LoginCredentials[]>FileHandler.readObjectFile("loginDB.json");
         this.loginQuestion();
     }

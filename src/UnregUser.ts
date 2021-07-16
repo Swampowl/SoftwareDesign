@@ -8,8 +8,8 @@ export class UnregUser {
     public initalStartOptions: string[] = ["<1> show ten questionaries", "<2> search questionarie by name", "<3> show amount of taken questionaries and their names"];
     public isRegistratedUser: boolean;
 
-    constructor (additionalStartoptions?: string[]) {
-        
+    constructor(additionalStartoptions?: string[]) {
+
         if (additionalStartoptions) {
             this.initalStartOptions = this.initalStartOptions.concat(additionalStartoptions);
             //   console.log(this.initalStartOptions);
@@ -41,6 +41,7 @@ export class UnregUser {
             case "1":
                 //console.clear();
                 console.log("CASE 1\n");
+                await this.showTenQuestionaires();
                 break;
 
             case "2":
@@ -67,6 +68,13 @@ export class UnregUser {
                 break;
         }
         await this.startMenue();
+    }
+    private async showTenQuestionaires() {
+        for (let ten: number = 0; ten < 10; ten++) {
+            console.log(UserManager.questionaireDB[ten]);
+
+
+        }
     }
 
     public async createQuestionarie(): Promise<void> {

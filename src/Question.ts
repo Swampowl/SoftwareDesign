@@ -1,15 +1,14 @@
 export class Question {
 
     public questionTitle: string;
-    public answerPossibilities: [];
-    public answerQuestion: string;
+    public answerPossibilities: string[];
+    public answer: string;
 
 
-    constructor(questionTitle: string, answerPossibilities: [], answerQuestion: string) {
-        
-        this.questionTitle = questionTitle
-        this.answerPossibilities = answerPossibilities
-        this.answerQuestion = answerQuestion
+    constructor(question: string, answerPossibilities: string[]) {
+
+        this.questionTitle = question;
+        this.answerPossibilities = answerPossibilities;
     }
 
 }
