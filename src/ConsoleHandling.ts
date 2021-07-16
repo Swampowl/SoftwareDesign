@@ -39,22 +39,26 @@ class ConsoleHandling {
   }
 
   public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
-   
+
     // this.consoleLine.write("Functions you can use: ");
     this.consoleLine.write("\n");
-    for (let possibility of showPossibilities) {
-      this.consoleLine.write(possibility.toString());
+
+    for (let index: number = 0; index < showPossibilities.length; index++) {
+
+      let possibility: string = showPossibilities[index];
+
+      this.consoleLine.write(`->>${index}<<-  <----->   ${possibility}`);
+
       this.consoleLine.write("\n")
+
     }
+
     this.consoleLine.write("\n");
 
     let answerPromise: string = await new Promise((resolve) => this.consoleLine.question(question.toString(), (answer: string) => {
       resolve(answer);
     }));
 
-    if (answerPromise.toLocaleLowerCase() == "exit") {
-      throw new Error("exit");
-    }
     return answerPromise;
   }
 

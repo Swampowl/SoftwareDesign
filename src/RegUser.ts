@@ -6,12 +6,16 @@ import { UserManager } from "./UserManager";
 import { DefaultDate } from "./DefaultDate";
 import FileHandler from "./FileHandler";
 
+
 export class RegUser extends UnregUser {
+
+    private userName: string;
 
     private testName: string = "lol";
 
-    constructor() {
+    constructor(userName: string) {
         super(["<4> view statistics of own questionaries", "<5> create a new questionarie"]);
+        this.userName = userName;
         // console.log(this.initalStartOptions);
     }
 
@@ -26,6 +30,7 @@ export class RegUser extends UnregUser {
             return await this.getDate(_startEndDefinition);
         }
     }
+
     public async getTitle(): Promise<string> {
         let newQuestionarieTitle: string = await ConsoleHandling.question("Please enter a questionarie name:  ");
         if (this.isQuestNameAlreadyUsed(newQuestionarieTitle)) {
@@ -34,8 +39,6 @@ export class RegUser extends UnregUser {
         }
         return newQuestionarieTitle;
     }
-
-
 
     public override async createQuestionarie(): Promise<void> {
 
@@ -49,7 +52,7 @@ export class RegUser extends UnregUser {
 
         let questions: Question[] = await this.getQuestions();
 
-        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length, newQuestionarieTitle, questions, questionarieStart, questionarieEnd, 0);
+        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length + 1, newQuestionarieTitle, questions, questionarieStart, questionarieEnd, 0, this.userName);
         UserManager.questionaireDB.push(questionaire);
         FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
 
@@ -106,8 +109,6 @@ export class RegUser extends UnregUser {
         return new Question(question, answerArray);
     }
 
-
-
     private async getAnswers(): Promise<string[]> {
         let answers: string[] = [];
 
@@ -143,26 +144,12 @@ export class RegUser extends UnregUser {
         return answer;
     }
 
-
-    /*     if (this.createQuestionarie(newQuestionarieTitle)) {
-             //console.clear();
-             console.log('\x1b[31m', "Username already taken.", '\x1b[0m');
-             return;
-         }
- 
-         let passwordLogin: string = await ConsoleHandling.showPossibilities(["enter password here:"], "");
- 
- 
-         let userID: number = this.loginDB.length;
- 
-         let loginData: LoginCredentials = new LoginCredentials(userID, usernameRegister, passwordLogin);
-         this.loginDB.push(loginData);
-         // console.log(this.loginDB);
-         // console.log(JSON.stringify(this.loginDB));
-         FileHandler.writeFile("loginDB.json", this.loginDB);
-      */   ////console.clear();
-
     public override async showOwnStatistics(): Promise<void> {
         console.log("Select one of your created questionaries!");
+    }
+
+    public override getRegUserName(): string{
+
+        return this.userName;
     }
 }
