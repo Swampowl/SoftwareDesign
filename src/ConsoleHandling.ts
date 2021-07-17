@@ -60,13 +60,7 @@ class ConsoleHandling {
     }));
 
 
-
-    try {
-
-      showPossibilities[+answerPromise];
-
-    } catch {
-
+    if (!showPossibilities[+answerPromise]) {
       console.log("invalid input! Please try again. Don't type in the full answer possibility, but rather the number next to it!")
       return await this.showIndexPossibilities(showPossibilities, question);
     }
@@ -76,7 +70,7 @@ class ConsoleHandling {
 
   public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
 
-      this.consoleLine.write("\n");
+    this.consoleLine.write("\n");
 
     for (let index: number = 0; index < showPossibilities.length; index++) {
 

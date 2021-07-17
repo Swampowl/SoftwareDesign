@@ -53,10 +53,13 @@ export class Question {
         console.log(this.possibleAnswers);
 
         let possiblAnswersAsStrings: string[] = Question.possibleAnswersToStrings(this.possibleAnswers);
+        
+        console.log(possiblAnswersAsStrings);
+
         let answer: number = await ConsoleHandling.showIndexPossibilities(possiblAnswersAsStrings, this.questionTitle)
 
         let chosenAnswer: PossibleAnswer = this.possibleAnswers[answer];
-    
+
         chosenAnswer.timesVoted++;
     }
 }

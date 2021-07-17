@@ -6,17 +6,33 @@ import { UserManager } from "./UserManager";
 import { DefaultDate } from "./DefaultDate";
 import FileHandler from "./FileHandler";
 import { PossibleAnswer } from "./PossibleAnswer";
+import { LoginCredentials } from "./LoginCredentials";
 
 
 export class RegUser extends UnregUser {
 
-    private userName: string;
     private testName: string = "lol";
+    private loginCredentials: LoginCredentials;
 
-    constructor(userName: string) {
+    constructor(loginCredentials: LoginCredentials) {
+
         super(["view statistics of own questionaries", "create a new questionarie"]);
-        this.userName = userName;
-        // console.log(this.initalStartOptions);
+        this.loginCredentials = loginCredentials;
+    }
+
+    get LoginCredentials(): LoginCredentials {
+        return this.loginCredentials;
+    }
+
+    override get UserName(): string {
+        return this.loginCredentials.username;
+    }
+
+    public static dumbToSmart(dumbUser: RegUser): RegUser {
+        let smartLoginCredentials: LoginCredentials = LoginCredentials.dumbToSmart(dumbUser.loginCredentials);
+
+        let smartUser: RegUser = new RegUser(smartLoginCredentials);
+        return smartUser;
     }
 
     public async getDate(_startEndDefinition: string): Promise<DefaultDate> {
@@ -52,7 +68,7 @@ export class RegUser extends UnregUser {
 
         let questions: Question[] = await this.getQuestions();
 
-        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length + 1, newQuestionarieTitle, questions, questionarieStart, questionarieEnd, 0, this.userName);
+        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length + 1, newQuestionarieTitle, questions, questionarieStart, questionarieEnd, 0, this.UserName);
         UserManager.questionaireDB.push(questionaire);
         FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
 
@@ -142,15 +158,15 @@ export class RegUser extends UnregUser {
             throw new Error("done");
         }
 
+
+        if (answer.length < 1) {
+            console.log("you must type in at least something!");
+        }
+
         return answer;
     }
 
     public override async showOwnStatistics(): Promise<void> {
         console.log("Select one of your created questionaries!");
-    }
-
-    public override getRegUserName(): string{
-
-        return this.userName;
     }
 }

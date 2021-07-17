@@ -8,21 +8,24 @@ import { UserManager } from "./UserManager";
 export class UnregUser {
 
     public initalStartOptions: string[] = ["select from ten questionaries", "search questionarie by name", "show taken questionaires"];
-    public questionairesTaken: string[] = [];
     public isRegistratedUser: boolean;
+    private takenQuestionaryIDs: number[] = [];
+
+
+    get UserName(): string {
+        return "";
+    }
 
     constructor(additionalStartoptions?: string[]) {
 
         if (additionalStartoptions) {
             this.initalStartOptions = this.initalStartOptions.concat(additionalStartoptions);
         }
-        this.questionairesTaken = [];
+        this.takenQuestionaryIDs = [];
         this.isRegistratedUser = (Object.getPrototypeOf(this) != UnregUser.prototype);
-
-        this.startMenue();
     }
 
-    private async startMenue() {
+    public async startMenue() {
 
         ConsoleHandling.printInput("Please choose a activity:");
         let answer: number = await ConsoleHandling.showIndexPossibilities(this.initalStartOptions, "Your Statement:");
@@ -50,8 +53,8 @@ export class UnregUser {
                 break;
 
             case 2:
+                this.showTakenQuestionaires();
                 //console.clear();
-                console.log("CASE 2\n");
                 // show questionaries taken
                 break;
 
@@ -68,6 +71,9 @@ export class UnregUser {
                 // ConsoleHandling.printInput("please choose a siutable input.")
                 break;
         }
+
+
+
         await this.startMenue();
     }
 
@@ -84,10 +90,8 @@ export class UnregUser {
         let answer: string = await ConsoleHandling.question("please type in the quesionaire index you want to select: ");
 
         selectedQuest = UserManager.questionaireDB[+answer];
-        let currentUsername: string = this.getRegUserName();
-        let currentAuthor: string = selectedQuest.author;
 
-        if (currentUsername != currentAuthor) {
+        if (this.UserName != selectedQuest.author) {
             await selectedQuest.takePart();
             FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
         }
@@ -95,10 +99,11 @@ export class UnregUser {
         else {
             console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.")
         }
-
-
     }
-    public getRegUserName(): string {
+
+    public showTakenQuestionaires(): string {
+        console.log("You have taken part in " + this.takenQuestionaryIDs.length + " Questionaries.")
+        ConsoleHandling.question("Enter anything to resume to main menue: ")
         return;
     }
 

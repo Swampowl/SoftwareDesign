@@ -9,15 +9,27 @@ import { Questionarie } from "./Questionarie";
 
 export class UserManager {
 
-    private loginDB: LoginCredentials[] = [];
+    private regUserDB: RegUser[] = [];
     public static questionaireDB: Questionarie[] = [];
 
     constructor() {
 
         this.readQuests();
+        this.readRegUserDB();
 
-        this.loginDB = <LoginCredentials[]>FileHandler.readObjectFile("loginDB.json");
         this.loginQuestion();
+    }
+
+    private readRegUserDB(): void {
+
+        this.regUserDB = <RegUser[]>FileHandler.readObjectFile("regUserDB.json");
+
+        for (let index: number = 0; index < this.regUserDB.length; index++) {
+            let dumbUser: RegUser = this.regUserDB[index];
+            let smartUser: RegUser = RegUser.dumbToSmart(dumbUser);
+            this.regUserDB[index] = smartUser;
+        }
+
     }
 
     private readQuests(): void {
@@ -41,7 +53,7 @@ export class UserManager {
             case "L":
 
                 let regUser: RegUser = await this.getRegUser();
-
+                regUser.startMenue();
                 return;
             case "R":
                 console.log("CASE R\n")
@@ -50,7 +62,8 @@ export class UserManager {
             case "G":
                 console.clear()
                 console.log('\x1b[33m', "You now continue as unregistrated User.", '\x1b[0m')
-                new UnregUser();
+                let unregUser: UnregUser = new UnregUser();
+                unregUser.startMenue();
                 return;
             default:
                 //console.clear();
@@ -68,44 +81,46 @@ export class UserManager {
         let usernameLogin: string = await ConsoleHandling.question("username: ");
         let passwordLogin: string = await ConsoleHandling.question("password: ");
 
+        let newLoginCredentials: LoginCredentials = new LoginCredentials(this.regUserDB.length, usernameLogin, passwordLogin)
 
-        if (this.isLoginCredentialsCorrect(usernameLogin, passwordLogin)) {
+        try {
+            return this.getRegUserByLoginCredentials(newLoginCredentials);
 
-            console.log("Username and Password match.");
-            return new RegUser(usernameLogin);
+        } catch (error) {
+            if (error.message == "UsernamePasswordMissmatch") {
+                console.log("Login Data missmatch! Try again");
+                return await this.getRegUser();
+            }
 
-        } else {
-            return await this.getRegUser();
+            throw error;
         }
     }
 
 
 
-    public isLoginCredentialsCorrect(usernameLogin: string, passwordLogin: string): boolean {
+    public getRegUserByLoginCredentials(inputLoginCredentials: LoginCredentials): RegUser {
+        console.log(this.regUserDB);
+        for (let index = 0; index < this.regUserDB.length; index++) {
+            let currentRegUser: RegUser = this.regUserDB[index];
+            console.log(currentRegUser);
 
-        let inputLoginCredentials: LoginCredentials = new LoginCredentials(this.loginDB.length, usernameLogin, passwordLogin);
 
-        for (let index = 0; index <= this.loginDB.length - 1; index++) {
-
-            if (inputLoginCredentials.equals(this.loginDB[index])) {
-                //console.clear();
+            if (inputLoginCredentials.equalsRegUser(currentRegUser)) {
                 console.log("Login successful.");
-                console.log('\x1b[32m', "You are now logged in as registrated User!", '\x1b[0m')
-                return true;
+                console.log('\x1b[32m', "You are now logged in as registrated User!", '\x1b[0m');
+                return currentRegUser;
             }
         }
 
-        //console.clear();
         console.log('\x1b[31m', "\nUsername and password do not match", '\x1b[0m', "\nreturning to main menue");
-        return false;
-
+        throw new Error("UsernamePasswordMissmatch");
     }
 
     public isRegisterUsernameTaken(usernameRegister: string): boolean {
 
-        for (let loginCredential of this.loginDB) {
+        for (let regUser of this.regUserDB) {
 
-            if (loginCredential.username == usernameRegister) {
+            if (regUser.UserName == usernameRegister) {
 
                 return true;
             }
@@ -127,17 +142,18 @@ export class UserManager {
 
         let passwordLogin: string = await ConsoleHandling.showPossibilities(["enter password here:"], "");
 
-
-        let userID: number = this.loginDB.length;
+        let userID: number = this.regUserDB.length;
 
         let loginData: LoginCredentials = new LoginCredentials(userID, usernameRegister, passwordLogin);
-        this.loginDB.push(loginData);
-        // console.log(this.loginDB);
-        // console.log(JSON.stringify(this.loginDB));
-        FileHandler.writeFile("loginDB.json", this.loginDB);
-        ////console.clear();
-        //console.clear();
-        console.log('\x1b[36m', "User " + usernameRegister + " was created. Returning to main menue.", '\x1b[0m');
+
+        console.log('\x1b[36m', "User " + usernameRegister + " was created. You are now successfully logged in!", '\x1b[0m');
+
+        let newRegUser: RegUser = new RegUser(loginData);
+
+        this.regUserDB.push(newRegUser);
+
+        FileHandler.writeFile("regUserDB.json", this.regUserDB);
+
     }
 
     /* private async createQuestionaire(){
