@@ -7,11 +7,11 @@
                 "possibleAnswers": [
                     {
                         "answer": "Ja",
-                        "timesVoted": 0
+                        "timesVoted": 4
                     },
                     {
                         "answer": "Nein",
-                        "timesVoted": 0
+                        "timesVoted": 2
                     }
                 ],
                 "questionTitle": "Ist?"
@@ -20,11 +20,11 @@
                 "possibleAnswers": [
                     {
                         "answer": "jetzt",
-                        "timesVoted": 0
+                        "timesVoted": 1
                     },
                     {
                         "answer": "heute",
-                        "timesVoted": 0
+                        "timesVoted": 4
                     }
                 ],
                 "questionTitle": "wann"
@@ -33,11 +33,11 @@
                 "possibleAnswers": [
                     {
                         "answer": "fuwa",
-                        "timesVoted": 0
+                        "timesVoted": 3
                     },
                     {
                         "answer": "berlin",
-                        "timesVoted": 0
+                        "timesVoted": 2
                     }
                 ],
                 "questionTitle": "wo"
@@ -46,11 +46,11 @@
                 "possibleAnswers": [
                     {
                         "answer": "mich",
-                        "timesVoted": 0
+                        "timesVoted": 2
                     },
                     {
                         "answer": "dich",
-                        "timesVoted": 0
+                        "timesVoted": 3
                     }
                 ],
                 "questionTitle": "wodurch"
@@ -59,27 +59,157 @@
                 "possibleAnswers": [
                     {
                         "answer": "dafür",
-                        "timesVoted": 0
+                        "timesVoted": 2
                     },
                     {
                         "answer": "hierfür",
-                        "timesVoted": 0
+                        "timesVoted": 2
                     }
                 ],
                 "questionTitle": "wofür"
             }
         ],
         "validStart": {
-            "day": 12,
-            "month": 2,
-            "year": 2001
-        },
-        "validEnd": {
             "day": 14,
             "month": 3,
             "year": 2001
         },
-        "timesQuestionarieTaken": 0,
+        "validEnd": {
+            "day": 12,
+            "month": 2,
+            "year": 2001
+        },
+        "timesQuestionarieTaken": 6,
         "author": "adminPenni"
+    },
+    {
+        "questionarieID": 2,
+        "title": "asdf",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "df",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "df",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "asdf"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "d",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "d",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "sf"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "sdf"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "dasf"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": ""
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": ""
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": ""
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "asdf",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "sdf",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": ""
+            }
+        ],
+        "validStart": {
+            "day": 12,
+            "month": 2,
+            "year": 3934
+        },
+        "validEnd": {
+            "day": 12,
+            "month": 2,
+            "year": 2991
+        },
+        "timesQuestionarieTaken": 0,
+        "author": "admin"
     }
 ]

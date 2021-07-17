@@ -5,16 +5,16 @@ import { Question } from "./Question";
 import { UserManager } from "./UserManager";
 import { DefaultDate } from "./DefaultDate";
 import FileHandler from "./FileHandler";
+import { PossibleAnswer } from "./PossibleAnswer";
 
 
 export class RegUser extends UnregUser {
 
     private userName: string;
-
     private testName: string = "lol";
 
     constructor(userName: string) {
-        super(["<4> view statistics of own questionaries", "<5> create a new questionarie"]);
+        super(["view statistics of own questionaries", "create a new questionarie"]);
         this.userName = userName;
         // console.log(this.initalStartOptions);
     }
@@ -106,7 +106,8 @@ export class RegUser extends UnregUser {
 
         let answerArray: string[] = await this.getAnswers();
 
-        return new Question(question, answerArray);
+        let answersAsPossibleAnswers: PossibleAnswer[] = Question.stringsToPossibleAnswers(answerArray);
+        return new Question(question, answersAsPossibleAnswers);
     }
 
     private async getAnswers(): Promise<string[]> {

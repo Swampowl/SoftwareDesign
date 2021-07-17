@@ -7,7 +7,8 @@ import { UserManager } from "./UserManager";
 
 export class UnregUser {
 
-    public initalStartOptions: string[] = ["<1> select from ten questionaries", "<2> search questionarie by name", "<3> show amount of taken questionaries and their names"];
+    public initalStartOptions: string[] = ["select from ten questionaries", "search questionarie by name", "show taken questionaires"];
+    public questionairesTaken: string[] = [];
     public isRegistratedUser: boolean;
 
     constructor(additionalStartoptions?: string[]) {
@@ -15,7 +16,7 @@ export class UnregUser {
         if (additionalStartoptions) {
             this.initalStartOptions = this.initalStartOptions.concat(additionalStartoptions);
         }
-
+        this.questionairesTaken = [];
         this.isRegistratedUser = (Object.getPrototypeOf(this) != UnregUser.prototype);
 
         this.startMenue();
@@ -24,10 +25,10 @@ export class UnregUser {
     private async startMenue() {
 
         ConsoleHandling.printInput("Please choose a activity:");
-        let answer: string = await ConsoleHandling.showPossibilities(this.initalStartOptions, "Your Statement:");
+        let answer: number = await ConsoleHandling.showIndexPossibilities(this.initalStartOptions, "Your Statement:");
 
         if (!this.isRegistratedUser) {
-            if (+answer > 3) {
+            if (answer > 3) {
                 ConsoleHandling.printInput("Your input is not siutable!");
                 await this.startMenue()
                 return;
@@ -35,28 +36,31 @@ export class UnregUser {
         }
 
         switch (answer) {
-            case "1":
+            case 0:
                 //console.clear();
-                console.log("CASE 1\n");
+                console.log("CASE 0\n");
                 await this.selectFromTenQuestionaires();
                 break;
 
-            case "2":
+            case 1:
+                //console.clear();
+                console.log("CASE 1\n");
+                // search questionaire by name
+
+                break;
+
+            case 2:
                 //console.clear();
                 console.log("CASE 2\n");
+                // show questionaries taken
                 break;
 
-            case "3":
-                //console.clear();
-                console.log("CASE 3\n");
-                break;
-
-            case "4":
+            case 3:
                 //console.clear();
                 await this.showOwnStatistics();
                 break;
 
-            case "5":
+            case 4:
                 await this.createQuestionarie();
                 break;
 
@@ -92,7 +96,7 @@ export class UnregUser {
             console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.")
         }
 
-    
+
     }
     public getRegUserName(): string {
         return;

@@ -38,7 +38,7 @@ class ConsoleHandling {
     return answerPromise;
   }
 
-  public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
+  public async showIndexPossibilities(showPossibilities: string[], question: string): Promise<number> {
 
     // this.consoleLine.write("Functions you can use: ");
     this.consoleLine.write("\n");
@@ -47,7 +47,42 @@ class ConsoleHandling {
 
       let possibility: string = showPossibilities[index];
 
-      this.consoleLine.write(`->>${index}<<-  <----->   ${possibility}`);
+      this.consoleLine.write(`->>${index}<<-  <--->  ${possibility}`);
+
+      this.consoleLine.write("\n")
+
+    }
+
+    this.consoleLine.write("\n");
+
+    let answerPromise: string = await new Promise((resolve) => this.consoleLine.question(question.toString(), (answer: string) => {
+      resolve(answer);
+    }));
+
+
+
+    try {
+
+      showPossibilities[+answerPromise];
+
+    } catch {
+
+      console.log("invalid input! Please try again. Don't type in the full answer possibility, but rather the number next to it!")
+      return await this.showIndexPossibilities(showPossibilities, question);
+    }
+
+    return +answerPromise;
+  }
+
+  public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
+
+      this.consoleLine.write("\n");
+
+    for (let index: number = 0; index < showPossibilities.length; index++) {
+
+      let possibility: string = showPossibilities[index];
+
+      this.consoleLine.write(`${possibility}`);
 
       this.consoleLine.write("\n")
 

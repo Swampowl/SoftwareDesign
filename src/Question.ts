@@ -10,8 +10,6 @@ export class Question {
 
         this.questionTitle = questionTitle;
         this.possibleAnswers = answerPossibilities;
-        
-      
     }
 
     public static stringsToPossibleAnswers(_possibilityStrings: string[]): PossibleAnswer[] {
@@ -55,17 +53,10 @@ export class Question {
         console.log(this.possibleAnswers);
 
         let possiblAnswersAsStrings: string[] = Question.possibleAnswersToStrings(this.possibleAnswers);
-        let answer: string = await ConsoleHandling.showPossibilities(possiblAnswersAsStrings, this.questionTitle)
+        let answer: number = await ConsoleHandling.showIndexPossibilities(possiblAnswersAsStrings, this.questionTitle)
 
-        let chosenAnswer: PossibleAnswer;
-
-        try {
-
-            chosenAnswer = this.possibleAnswers[+answer];
-            chosenAnswer.timesVoted++;
-
-        } catch {
-            console.log("invvalid input! Please try again. Don't type in the full answer possibility, but rather the number next to it!")
-        }
+        let chosenAnswer: PossibleAnswer = this.possibleAnswers[answer];
+    
+        chosenAnswer.timesVoted++;
     }
 }
