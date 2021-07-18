@@ -121,7 +121,7 @@ export class RegUser extends UnregUser {
                 let question: Question = await this.getQuestion(questions.length);
                 questions.push(question);
 
-                if (questions.length > this.minAnswers) {
+                if (questions.length > this.minAnswers + 1) {
                     console.log("You have given enough answers! If you want to finish, write: done");
                 }
             }
