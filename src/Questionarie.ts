@@ -3,13 +3,16 @@ import { DefaultDate } from "./DefaultDate";
 import ConsoleHandling from "./ConsoleHandling";
 import { RegUser } from "./RegUser";
 import { PossibleAnswer } from "./PossibleAnswer";
+import { UnregUser } from "./UnregUser";
+import { DateArea } from "./DateArea";
+import { UserManager } from "./UserManager";
+import FileHandler from "./FileHandler";
 
 export class Questionarie {
 
     public questionarieID: number;
     public title: string;
-    public validStart: DefaultDate;
-    public validEnd: DefaultDate;
+    public dateArea: DateArea;
     public timesQuestionarieTaken: number;
     public author: string;
     public questions: Question[];
@@ -18,16 +21,14 @@ export class Questionarie {
         questionarieID: number,
         title: string,
         questionarieQuestions: Question[],
-        validStart: DefaultDate,
-        validEnd: DefaultDate,
+        dateArea: DateArea,
         timesQuestionarieTaken: number,
         author: string
     ) {
         this.questionarieID = questionarieID
         this.title = title
         this.questions = questionarieQuestions
-        this.validStart = validStart
-        this.validEnd = validEnd
+        this.dateArea = dateArea;
         this.timesQuestionarieTaken = timesQuestionarieTaken
         this.author = author;
     }
@@ -41,15 +42,24 @@ export class Questionarie {
             smartQuestions.push(Question.dumbToSmart(dumbQuestions[questionIndex]));
         }
 
+        let smartDateArea: DateArea = DateArea.dumbToSmart(dumb.dateArea);
+
         return new Questionarie(
             dumb.questionarieID,
             dumb.title,
             smartQuestions,
-            dumb.validEnd,
-            dumb.validStart,
+            smartDateArea,
             dumb.timesQuestionarieTaken,
             dumb.author);
     }
+
+    public showCreatedQuestionaireStatistics() {
+        this.questions.forEach(question => {
+            console.log("----> " + question.questionTitle);
+            question.showCreateQuestionStatistics();
+        })
+    }
+
 
     public async takePart(): Promise<void> {
 
@@ -63,6 +73,5 @@ export class Questionarie {
 
         console.log("You have answered all questions in this questionaire.\nReturning to main menue.")
         this.timesQuestionarieTaken++;
-        console.log(this.timesQuestionarieTaken);
     }
 }

@@ -7,17 +7,20 @@ import { DefaultDate } from "./DefaultDate";
 import FileHandler from "./FileHandler";
 import { PossibleAnswer } from "./PossibleAnswer";
 import { LoginCredentials } from "./LoginCredentials";
+import { DateArea } from "./DateArea";
 
 
 export class RegUser extends UnregUser {
 
     private testName: string = "lol";
     private loginCredentials: LoginCredentials;
+    private createdQuestionaireIDs: number[] = [];
 
-    constructor(loginCredentials: LoginCredentials) {
+    constructor(loginCredentials: LoginCredentials, takenQuestionaireIDs?: number[], createQuestionarieIDs?: number[]) {
+        super(["view statistics of own questionaries", "create a new questionarie"], takenQuestionaireIDs);
 
-        super(["view statistics of own questionaries", "create a new questionarie"]);
         this.loginCredentials = loginCredentials;
+        this.createdQuestionaireIDs = createQuestionarieIDs;
     }
 
     get LoginCredentials(): LoginCredentials {
@@ -31,7 +34,8 @@ export class RegUser extends UnregUser {
     public static dumbToSmart(dumbUser: RegUser): RegUser {
         let smartLoginCredentials: LoginCredentials = LoginCredentials.dumbToSmart(dumbUser.loginCredentials);
 
-        let smartUser: RegUser = new RegUser(smartLoginCredentials);
+        let smartUser: RegUser = new RegUser(smartLoginCredentials, dumbUser.takenQuestionaryIDs, dumbUser.createdQuestionaireIDs);
+
         return smartUser;
     }
 
@@ -62,17 +66,43 @@ export class RegUser extends UnregUser {
 
         let newQuestionarieTitle: string = await this.getTitle();
 
-        let questionarieStart: DefaultDate = await this.getDate("start");
-
-        let questionarieEnd: DefaultDate = await this.getDate("end");
+        let dateArea: DateArea = await this.getDateArea();
 
         let questions: Question[] = await this.getQuestions();
 
-        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length + 1, newQuestionarieTitle, questions, questionarieStart, questionarieEnd, 0, this.UserName);
+        let questionaire: Questionarie = new Questionarie(UserManager.questionaireDB.length, newQuestionarieTitle, questions, dateArea, 0, this.UserName);
+
         UserManager.questionaireDB.push(questionaire);
-        FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
+        this.createdQuestionaireIDs.push(questionaire.questionarieID);
+
+        ConsoleHandling.debugTwo("this user: createdDB:", this.createdQuestionaireIDs);
+        ConsoleHandling.debugTwo("database Quest dDB:", UserManager.regUserDB);
+
+        UserManager.writeAllDBs();
 
         return;
+    }
+
+    private async getDateArea(): Promise<DateArea> {
+        return new DateArea(new DefaultDate("18.07.2021"), new DefaultDate("20.07.2021"));
+        let questionarieStart: DefaultDate = await this.getDate("start");
+
+
+        let systemDate: Date = new Date();
+
+        if (questionarieStart.isBefore(systemDate)) {
+            console.log("please type in a date which is not in the past!");
+            return await this.getDateArea();
+        }
+
+        let questionarieEnd: DefaultDate = await this.getDate("end");
+
+        if (questionarieEnd.isBefore(questionarieStart)) {
+            console.log("please type in a date which is after or at the start date!");
+            return await this.getDateArea();
+        }
+
+        return new DateArea(questionarieStart, questionarieEnd);
     }
 
     private isQuestNameAlreadyUsed(newQuestionarieTitle: string): boolean {
@@ -88,6 +118,10 @@ export class RegUser extends UnregUser {
             while (true) {
                 let question: Question = await this.getQuestion(questions.length);
                 questions.push(question);
+
+                if (questions.length >= 5) {
+                    console.log("You have given enough answers! If you want to finish, write: done");
+                }
             }
 
         } catch (error) {
@@ -148,7 +182,7 @@ export class RegUser extends UnregUser {
     }
 
     private async getAnswer(amountAnswers: number): Promise<string> {
-        let answer: string = await ConsoleHandling.question("Enter your next answerPossibility here (if you have enough answers, type `done`) : ");
+        let answer: string = await ConsoleHandling.question("Enter your next answerPossibility here: ");
 
         if (answer == "done") {
             if (amountAnswers < 2) {
@@ -166,7 +200,23 @@ export class RegUser extends UnregUser {
         return answer;
     }
 
-    public override async showOwnStatistics(): Promise<void> {
+    public override async showTakenQuestionaireStatistics(): Promise<void> {
         console.log("Select one of your created questionaries!");
+    }
+
+    public override async showCreatedQuestionairesStatistics() {
+        console.log("You will now see a statistic of your created Questionaries!");
+
+        console.log(this.createdQuestionaireIDs);
+
+        this.createdQuestionaireIDs.forEach(questID => {
+            let currentQuestionaire: Questionarie = UserManager.questionaireDB[questID];
+            console.log();
+            console.log("asldkfjlsjf");
+
+            console.log(`-> title: ${currentQuestionaire.title}`);
+            currentQuestionaire.showCreatedQuestionaireStatistics();
+            console.log();
+        })
     }
 }

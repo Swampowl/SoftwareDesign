@@ -9,30 +9,60 @@ import { Questionarie } from "./Questionarie";
 
 export class UserManager {
 
-    private regUserDB: RegUser[] = [];
+
+    public static regUserDB: RegUser[] = [];
     public static questionaireDB: Questionarie[] = [];
 
     constructor() {
 
-        this.readQuests();
-        this.readRegUserDB();
+        UserManager.readAllDBs();
 
         this.loginQuestion();
     }
 
-    private readRegUserDB(): void {
 
-        this.regUserDB = <RegUser[]>FileHandler.readObjectFile("regUserDB.json");
+    public static questionarieDBToStringArray(): string[] {
+        let strings: string[] = [];
+        UserManager.questionaireDB.forEach(quest => {
+            strings.push(quest.title);
+        });
+        return strings;
+    }
 
-        for (let index: number = 0; index < this.regUserDB.length; index++) {
-            let dumbUser: RegUser = this.regUserDB[index];
+    public static readAllDBs(): void {
+        UserManager.readRegUserDB();
+        UserManager.readQuestDB();
+    }
+    public static writeAllDBs(): void {
+        
+        UserManager.writeRegUserDB();
+        UserManager.writetoQuestDB();
+    }
+
+    public static writetoQuestDB(): void {
+        FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
+    }
+
+    public static writeRegUserDB(): void {
+        console.log("will write regUserDB: ", UserManager.regUserDB);
+        FileHandler.writeFile("regUserDB.json", UserManager.regUserDB);
+    }
+
+    private static readRegUserDB(): void {
+
+        UserManager.regUserDB = <RegUser[]>FileHandler.readObjectFile("regUserDB.json");
+
+        for (let index: number = 0; index < UserManager.regUserDB.length; index++) {
+            let dumbUser: RegUser = UserManager.regUserDB[index];
+
             let smartUser: RegUser = RegUser.dumbToSmart(dumbUser);
-            this.regUserDB[index] = smartUser;
+            UserManager.regUserDB[index] = smartUser;
+
         }
 
     }
 
-    private readQuests(): void {
+    private static readQuestDB(): void {
         let dumbQuestionaire: Questionarie[] = <Questionarie[]>FileHandler.readObjectFile("QuestionaireDB.json");
         for (let index: number = 0; index < dumbQuestionaire.length; index++) {
             UserManager.questionaireDB.push(Questionarie.dumbToSmart(dumbQuestionaire[index]));
@@ -47,7 +77,6 @@ export class UserManager {
     private async loginQuestion(): Promise<void> {
         console.log("Welcome to questionaire main menue.")
         let answer: string = await ConsoleHandling.showPossibilities(["<L> Login", "<R> Register", "<G> Continue as guest"], "Your Statement:");
-        console.log(answer);
 
         switch (answer.toUpperCase()) {
             case "L":
@@ -56,7 +85,6 @@ export class UserManager {
                 regUser.startMenue();
                 return;
             case "R":
-                console.log("CASE R\n")
                 await this.register();
                 break;
             case "G":
@@ -81,7 +109,7 @@ export class UserManager {
         let usernameLogin: string = await ConsoleHandling.question("username: ");
         let passwordLogin: string = await ConsoleHandling.question("password: ");
 
-        let newLoginCredentials: LoginCredentials = new LoginCredentials(this.regUserDB.length, usernameLogin, passwordLogin)
+        let newLoginCredentials: LoginCredentials = new LoginCredentials(UserManager.regUserDB.length, usernameLogin, passwordLogin)
 
         try {
             return this.getRegUserByLoginCredentials(newLoginCredentials);
@@ -99,11 +127,8 @@ export class UserManager {
 
 
     public getRegUserByLoginCredentials(inputLoginCredentials: LoginCredentials): RegUser {
-        console.log(this.regUserDB);
-        for (let index = 0; index < this.regUserDB.length; index++) {
-            let currentRegUser: RegUser = this.regUserDB[index];
-            console.log(currentRegUser);
-
+        for (let index = 0; index < UserManager.regUserDB.length; index++) {
+            let currentRegUser: RegUser = UserManager.regUserDB[index];
 
             if (inputLoginCredentials.equalsRegUser(currentRegUser)) {
                 console.log("Login successful.");
@@ -118,7 +143,7 @@ export class UserManager {
 
     public isRegisterUsernameTaken(usernameRegister: string): boolean {
 
-        for (let regUser of this.regUserDB) {
+        for (let regUser of UserManager.regUserDB) {
 
             if (regUser.UserName == usernameRegister) {
 
@@ -142,7 +167,7 @@ export class UserManager {
 
         let passwordLogin: string = await ConsoleHandling.showPossibilities(["enter password here:"], "");
 
-        let userID: number = this.regUserDB.length;
+        let userID: number = UserManager.regUserDB.length;
 
         let loginData: LoginCredentials = new LoginCredentials(userID, usernameRegister, passwordLogin);
 
@@ -150,28 +175,9 @@ export class UserManager {
 
         let newRegUser: RegUser = new RegUser(loginData);
 
-        this.regUserDB.push(newRegUser);
+        UserManager.regUserDB.push(newRegUser);
 
-        FileHandler.writeFile("regUserDB.json", this.regUserDB);
+        FileHandler.writeFile("regUserDB.json", UserManager.regUserDB);
 
     }
-
-    /* private async createQuestionaire(){
-         //console.clear();
-         ConsoleHandling.printInput("Please name your Questionaire!")
-         let questionaireTitle: string = await ConsoleHandling.showPossibilities(["Enter title here:"], "");
-         ConsoleHandling.printInput("Please name your Questionaire!")
-         let questionaireID: number = this.loginDB.length;
-        
- 
-         // Auf Typescript gültigkeit überprüfen, eventull via tslint3
-         let loginData: LoginCredentials = { userID: userID, username: usernameLogin, password: passwordLogin };
-         this.loginDB.push(loginData);
-         // console.log(this.loginDB);
-         // console.log(JSON.stringify(this.loginDB));
-         FileHandler.writeFile("loginDB.json", this.loginDB);
-         //console.clear();
-         console.log("User was created. Returning to main menue.");
-     }
- */
 }

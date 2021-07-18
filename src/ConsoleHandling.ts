@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import * as readline from 'readline';
+import { convertToObject } from 'typescript';
 
 class ConsoleHandling {
   private static instance: ConsoleHandling = new ConsoleHandling()
@@ -12,13 +13,20 @@ class ConsoleHandling {
   });
 
   constructor() {
-    if (ConsoleHandling.instance)
-      throw new Error("Use ConsoleHandling.Instance() instead new ConsoleHandling()")
-    ConsoleHandling.instance = this
+    if (ConsoleHandling.instance) {
+      throw new Error("Use ConsoleHandling.Instance() instead new ConsoleHandling()");
+      ConsoleHandling.instance = this;
+    }
   }
 
   public static getInstance(): ConsoleHandling {
     return ConsoleHandling.instance
+  }
+
+  public debugTwo(message: any, secondMessage: any): void {
+    console.log(message);
+    console.log(secondMessage);
+
   }
 
   public async question(question: string): Promise<string> {

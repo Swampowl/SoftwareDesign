@@ -3,6 +3,7 @@ import { PossibleAnswer } from "./PossibleAnswer";
 
 export class Question {
 
+
     public questionTitle: string;
     public possibleAnswers: PossibleAnswer[] = [];
 
@@ -48,13 +49,17 @@ export class Question {
         return new Question(dumb.questionTitle, smartAnswerPossibilities);
     }
 
+    public showCreateQuestionStatistics(): void {
+        let index: number = 0;
+        this.possibleAnswers.forEach(answer => {
+            console.log(`------>${index} ${answer.answer} ${answer.timesVoted}`);
+            index++;
+        })
+    }
+
     public async answer(): Promise<void> {
-
-        console.log(this.possibleAnswers);
-
         let possiblAnswersAsStrings: string[] = Question.possibleAnswersToStrings(this.possibleAnswers);
-        
-        console.log(possiblAnswersAsStrings);
+
 
         let answer: number = await ConsoleHandling.showIndexPossibilities(possiblAnswersAsStrings, this.questionTitle)
 

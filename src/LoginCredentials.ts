@@ -16,7 +16,6 @@ export class LoginCredentials {
     }
     
     public equals(_second: LoginCredentials): boolean {
-        console.log(this.username, _second.username, this.password, _second.password);
 
         if (this.username == _second.username && this.password == _second.password) {
             return true;
@@ -26,7 +25,6 @@ export class LoginCredentials {
     }
 
     public equalsRegUser(_regUser: RegUser): boolean {
-        console.log(_regUser);
         return this.equals(_regUser.LoginCredentials);
     }
 }

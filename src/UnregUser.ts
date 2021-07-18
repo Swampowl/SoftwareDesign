@@ -9,19 +9,22 @@ export class UnregUser {
 
     public initalStartOptions: string[] = ["select from ten questionaries", "search questionarie by name", "show taken questionaires"];
     public isRegistratedUser: boolean;
-    private takenQuestionaryIDs: number[] = [];
-
+    public takenQuestionaryIDs: number[] = [];
 
     get UserName(): string {
         return "";
     }
 
-    constructor(additionalStartoptions?: string[]) {
+    constructor(additionalStartoptions?: string[], takenQuestionaireIDs?: number[]) {
 
         if (additionalStartoptions) {
             this.initalStartOptions = this.initalStartOptions.concat(additionalStartoptions);
         }
-        this.takenQuestionaryIDs = [];
+
+        if (takenQuestionaireIDs) {
+            this.takenQuestionaryIDs = takenQuestionaireIDs;
+        }
+
         this.isRegistratedUser = (Object.getPrototypeOf(this) != UnregUser.prototype);
     }
 
@@ -40,27 +43,20 @@ export class UnregUser {
 
         switch (answer) {
             case 0:
-                //console.clear();
-                console.log("CASE 0\n");
                 await this.selectFromTenQuestionaires();
                 break;
 
             case 1:
-                //console.clear();
-                console.log("CASE 1\n");
-                // search questionaire by name
+                await this.searchQuestionaireByName();
 
                 break;
 
             case 2:
-                this.showTakenQuestionaires();
-                //console.clear();
-                // show questionaries taken
+                this.showTakenQuestionairesStatistics();
                 break;
 
             case 3:
-                //console.clear();
-                await this.showOwnStatistics();
+                this.showCreatedQuestionairesStatistics();
                 break;
 
             case 4:
@@ -76,38 +72,84 @@ export class UnregUser {
 
         await this.startMenue();
     }
+    private async searchQuestionaireByName(): Promise<void> {
+
+        let answer: string = await ConsoleHandling.showPossibilities(UserManager.questionarieDBToStringArray(), `please type in the quesionaire name you want to select:`);
+
+        for (let quest of UserManager.questionaireDB) {
+            if (quest.title == answer) {
+                await this.takePartAtQuestionaire(quest);
+                return;
+            }
+        }
+
+        console.log(`No Questionaire matching with your input name ${answer} was found!`);
+    }
+
+
+    private async takePartAtQuestionaire(quest: Questionarie): Promise<void> {
+
+        let isSelectedQuestAlreadyTaken: boolean;
+
+        this.takenQuestionaryIDs.forEach(questID => {
+            if (questID == quest.questionarieID) {
+                isSelectedQuestAlreadyTaken = true;
+            }
+        })
+
+        if (isSelectedQuestAlreadyTaken) {
+            console.log("You have already taken part at your chosen Questionaire!");
+            return;
+        }
+
+        if (this.UserName == quest.author) {
+            console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.")
+            return;
+        }
+
+        if (!quest.dateArea.wraps(new Date())) {
+            console.log(`The chosen Questionaire is not active.\n The questionaires date area is not valid at the moment.`);
+            return;
+        }
+
+
+        await quest.takePart();
+
+        this.takenQuestionaryIDs.push(quest.questionarieID);
+        UserManager.writeAllDBs();
+    }
+
 
     private async selectFromTenQuestionaires(): Promise<void> {
 
         let selectedQuest: Questionarie;
 
-        for (let questIndex: number = 0; (questIndex < UserManager.questionaireDB.length && questIndex < 10); questIndex++) {
-            let title: string = UserManager.questionaireDB[questIndex].title;
+        let questsAsString: string[] = UserManager.questionarieDBToStringArray();
 
-            console.log(`<${questIndex}>   ` + title);
-        }
-
-        let answer: string = await ConsoleHandling.question("please type in the quesionaire index you want to select: ");
+        let answer: number = await ConsoleHandling.showIndexPossibilities(questsAsString, `please type in the quesionaire index you want to select`);
 
         selectedQuest = UserManager.questionaireDB[+answer];
 
-        if (this.UserName != selectedQuest.author) {
-            await selectedQuest.takePart();
-            FileHandler.writeFile("QuestionaireDB.json", UserManager.questionaireDB);
-        }
+        await this.takePartAtQuestionaire(selectedQuest);
 
-        else {
-            console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.")
-        }
     }
 
-    public showTakenQuestionaires(): string {
-        console.log("You have taken part in " + this.takenQuestionaryIDs.length + " Questionaries.")
+    public showTakenQuestionairesStatistics(): string {
+        console.log("You have taken part in " + this.takenQuestionaryIDs.length + " Questionaries, all listed here:");
+
+        this.takenQuestionaryIDs.forEach(questID => {
+            console.log(UserManager.questionaireDB[questID].title);
+        })
+
         ConsoleHandling.question("Enter anything to resume to main menue: ")
         return;
     }
 
+    // Method which gets overwritten by RegUser:
     public async createQuestionarie(): Promise<void> { }
-
-    public async showOwnStatistics(): Promise<void> { }
+    // Method which gets overwritten by RegUser:
+    public async showTakenQuestionaireStatistics(): Promise<void> { }
+    // Method which gets overwritten by RegUser:
+    public showCreatedQuestionairesStatistics() { }
 }
+
