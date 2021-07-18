@@ -27,24 +27,24 @@ export class Questionarie {
         this.author = author;
     }
 
-    public static makeExecutable(dumb: Questionarie): Questionarie {
+    public static makeExecutable(inanely: Questionarie): Questionarie {
 
-        let dumbQuestions: Question[] = dumb.questions;
+        let inanelyQuestions: Question[] = inanely.questions;
         let smartQuestions: Question[] = [];
 
-        for (let questionIndex: number = 0; questionIndex < dumbQuestions.length; questionIndex++) {
-            smartQuestions.push(Question.makeExecutable(dumbQuestions[questionIndex]));
+        for (let questionIndex: number = 0; questionIndex < inanelyQuestions.length; questionIndex++) {
+            smartQuestions.push(Question.makeExecutable(inanelyQuestions[questionIndex]));
         }
 
-        let smartDateArea: DateArea = DateArea.makeExecutable(dumb.dateArea);
+        let smartDateArea: DateArea = DateArea.makeExecutable(inanely.dateArea);
 
         return new Questionarie(
-            dumb.questionarieID,
-            dumb.title,
+            inanely.questionarieID,
+            inanely.title,
             smartQuestions,
             smartDateArea,
-            dumb.timesQuestionarieTaken,
-            dumb.author);
+            inanely.timesQuestionarieTaken,
+            inanely.author);
     }
 
     public showCreatedQuestionaireStatistics(): Promise<string> {

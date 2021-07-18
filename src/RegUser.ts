@@ -30,10 +30,10 @@ export class RegUser extends UnregUser {
         return this.loginCredentials.username;
     }
 
-    public static makeExecutable(dumbUser: RegUser): RegUser {
-        let smartLoginCredentials: LoginCredentials = LoginCredentials.makeExecutable(dumbUser.loginCredentials);
+    public static makeExecutable(inanelyUser: RegUser): RegUser {
+        let smartLoginCredentials: LoginCredentials = LoginCredentials.makeExecutable(inanelyUser.loginCredentials);
 
-        let smartUser: RegUser = new RegUser(smartLoginCredentials, dumbUser.takenQuestionaryIDs, dumbUser.createdQuestionaireIDs);
+        let smartUser: RegUser = new RegUser(smartLoginCredentials, inanelyUser.takenQuestionaryIDs, inanelyUser.createdQuestionaireIDs);
 
         return smartUser;
     }

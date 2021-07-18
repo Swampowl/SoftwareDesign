@@ -25,8 +25,8 @@ export class DefaultDate {
         return new DefaultDate(`${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`);
     }
 
-    public static makeExecutable(dumb: DefaultDate): DefaultDate {
-        return new DefaultDate(`${dumb.day}.${dumb.month}.${dumb.year}`);
+    public static makeExecutable(inanely: DefaultDate): DefaultDate {
+        return new DefaultDate(`${inanely.day}.${inanely.month}.${inanely.year}`);
     }
 
     public getDateUntil(otherDate: DefaultDate): DateDiff {

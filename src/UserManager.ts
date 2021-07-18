@@ -53,9 +53,9 @@ export class UserManager {
         UserManager.regUserDB = <RegUser[]>FileHandler.readObjectFile("regUserDB.json");
 
         for (let index: number = 0; index < UserManager.regUserDB.length; index++) {
-            let dumbUser: RegUser = UserManager.regUserDB[index];
+            let inanelyUser: RegUser = UserManager.regUserDB[index];
 
-            let smartUser: RegUser = RegUser.makeExecutable(dumbUser);
+            let smartUser: RegUser = RegUser.makeExecutable(inanelyUser);
             UserManager.regUserDB[index] = smartUser;
 
         }
@@ -63,9 +63,9 @@ export class UserManager {
     }
 
     private static readQuestDB(): void {
-        let dumbQuestionaire: Questionarie[] = <Questionarie[]>FileHandler.readObjectFile("QuestionaireDB.json");
-        for (let index: number = 0; index < dumbQuestionaire.length; index++) {
-            UserManager.questionaireDB.push(Questionarie.makeExecutable(dumbQuestionaire[index]));
+        let inanelyQuestionaire: Questionarie[] = <Questionarie[]>FileHandler.readObjectFile("QuestionaireDB.json");
+        for (let index: number = 0; index < inanelyQuestionaire.length; index++) {
+            UserManager.questionaireDB.push(Questionarie.makeExecutable(inanelyQuestionaire[index]));
         }
     }
 

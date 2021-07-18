@@ -35,18 +35,18 @@ export class Question {
         return possibilityStrings;
     }
 
-    public static makeExecutable(dumb: Question): Question {
+    public static makeExecutable(inanely: Question): Question {
 
-        let dumbAnswerPossibilities: PossibleAnswer[] = dumb.possibleAnswers;
+        let inanelyAnswerPossibilities: PossibleAnswer[] = inanely.possibleAnswers;
         let smartAnswerPossibilities: PossibleAnswer[] = [];
 
-        for (let index: number = 0; index < dumbAnswerPossibilities.length; index++) {
-            let currentPossibility: PossibleAnswer = dumbAnswerPossibilities[index];
+        for (let index: number = 0; index < inanelyAnswerPossibilities.length; index++) {
+            let currentPossibility: PossibleAnswer = inanelyAnswerPossibilities[index];
 
             smartAnswerPossibilities.push(new PossibleAnswer(currentPossibility.answer, currentPossibility.timesVoted));
         }
 
-        return new Question(dumb.questionTitle, smartAnswerPossibilities);
+        return new Question(inanely.questionTitle, smartAnswerPossibilities);
     }
 
     public showCreateQuestionStatistics(): void {

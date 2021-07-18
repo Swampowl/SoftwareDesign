@@ -11,8 +11,8 @@ export class LoginCredentials {
         this.password = password;
     }
 
-    static makeExecutable(dumbCredentials: LoginCredentials): LoginCredentials {
-        return new LoginCredentials(dumbCredentials.userID, dumbCredentials.username, dumbCredentials.password);
+    static makeExecutable(inanelyCredentials: LoginCredentials): LoginCredentials {
+        return new LoginCredentials(inanelyCredentials.userID, inanelyCredentials.username, inanelyCredentials.password);
     }
     
     public equals(_second: LoginCredentials): boolean {
