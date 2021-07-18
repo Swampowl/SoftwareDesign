@@ -4,7 +4,6 @@ import { UnregUser } from "./UnregUser";
 import { Question } from "./Question";
 import { UserManager } from "./UserManager";
 import { DefaultDate } from "./DefaultDate";
-import FileHandler from "./FileHandler";
 import { PossibleAnswer } from "./PossibleAnswer";
 import { LoginCredentials } from "./LoginCredentials";
 import { DateArea } from "./DateArea";
@@ -12,9 +11,9 @@ import { DateArea } from "./DateArea";
 
 export class RegUser extends UnregUser {
 
-    private testName: string = "lol";
     private loginCredentials: LoginCredentials;
     private createdQuestionaireIDs: number[] = [];
+    testName: string;
 
     constructor(loginCredentials: LoginCredentials, takenQuestionaireIDs?: number[], createQuestionarieIDs?: number[]) {
         super(["view statistics of own questionaries", "create a new questionarie"], takenQuestionaireIDs);
@@ -54,7 +53,7 @@ export class RegUser extends UnregUser {
     public async getTitle(): Promise<string> {
         let newQuestionarieTitle: string = await ConsoleHandling.question("Please enter a questionarie name:  ");
         if (this.isQuestNameAlreadyUsed(newQuestionarieTitle)) {
-            console.log("Questionaire name already in use.")
+            console.log("Questionaire name already in use.");
             return await this.getTitle();
         }
         return newQuestionarieTitle;
@@ -62,7 +61,7 @@ export class RegUser extends UnregUser {
 
     public override async createQuestionarie(): Promise<void> {
 
-        console.log("In the following steps you can create your own questionarie.")
+        console.log("In the following steps you can create your own questionarie.");
 
         let newQuestionarieTitle: string = await this.getTitle();
 
@@ -204,19 +203,19 @@ export class RegUser extends UnregUser {
         console.log("Select one of your created questionaries!");
     }
 
-    public override async showCreatedQuestionairesStatistics() {
+    public override async showCreatedQuestionairesStatistics(): Promise<void> {
         console.log("You will now see a statistic of your created Questionaries!");
 
         console.log(this.createdQuestionaireIDs);
 
-        this.createdQuestionaireIDs.forEach(questID => {
+        this.createdQuestionaireIDs.forEach(function (questID): void {
             let currentQuestionaire: Questionarie = UserManager.questionaireDB[questID];
             console.log();
             console.log("asldkfjlsjf");
 
-            console.log(`-> title: ${currentQuestionaire.title}`);
+            console.log(`-> Questionaire-title: ${currentQuestionaire.title}`);
             currentQuestionaire.showCreatedQuestionaireStatistics();
             console.log();
-        })
+        });
     }
 }

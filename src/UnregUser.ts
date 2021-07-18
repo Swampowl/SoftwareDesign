@@ -1,6 +1,4 @@
-import { initial } from "lodash";
 import ConsoleHandling from "./ConsoleHandling";
-import FileHandler from "./FileHandler";
 import { Questionarie } from "./Questionarie";
 import { UserManager } from "./UserManager";
 
@@ -28,7 +26,7 @@ export class UnregUser {
         this.isRegistratedUser = (Object.getPrototypeOf(this) != UnregUser.prototype);
     }
 
-    public async startMenue() {
+    public async startMenue(): Promise<void> {
 
         ConsoleHandling.printInput("Please choose a activity:");
         let answer: number = await ConsoleHandling.showIndexPossibilities(this.initalStartOptions, "Your Statement:");
@@ -36,7 +34,7 @@ export class UnregUser {
         if (!this.isRegistratedUser) {
             if (answer > 3) {
                 ConsoleHandling.printInput("Your input is not siutable!");
-                await this.startMenue()
+                await this.startMenue();
                 return;
             }
         }
@@ -91,11 +89,11 @@ export class UnregUser {
 
         let isSelectedQuestAlreadyTaken: boolean;
 
-        this.takenQuestionaryIDs.forEach(questID => {
+        this.takenQuestionaryIDs.forEach(function (questID): void {
             if (questID == quest.questionarieID) {
                 isSelectedQuestAlreadyTaken = true;
             }
-        })
+        });
 
         if (isSelectedQuestAlreadyTaken) {
             console.log("You have already taken part at your chosen Questionaire!");
@@ -103,7 +101,7 @@ export class UnregUser {
         }
 
         if (this.UserName == quest.author) {
-            console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.")
+            console.log("You are the questionaries author.\nYou are not authorized to take part in this questionaire.");
             return;
         }
 
@@ -125,7 +123,7 @@ export class UnregUser {
         let selectedQuest: Questionarie;
 
         let questsAsString: string[] = UserManager.questionarieDBToStringArray();
-
+        console.log('\x1b[32m', `Please select one of following 10 questionaries.`, '\x1b[0m');
         let answer: number = await ConsoleHandling.showIndexPossibilities(questsAsString, `please type in the quesionaire index you want to select`);
 
         selectedQuest = UserManager.questionaireDB[+answer];
@@ -137,19 +135,22 @@ export class UnregUser {
     public showTakenQuestionairesStatistics(): string {
         console.log("You have taken part in " + this.takenQuestionaryIDs.length + " Questionaries, all listed here:");
 
-        this.takenQuestionaryIDs.forEach(questID => {
+        this.takenQuestionaryIDs.forEach(function (questID): void {
             console.log(UserManager.questionaireDB[questID].title);
-        })
+        });
 
-        ConsoleHandling.question("Enter anything to resume to main menue: ")
+        ConsoleHandling.question("Enter anything to resume to main menue: ");
         return;
     }
 
     // Method which gets overwritten by RegUser:
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public async createQuestionarie(): Promise<void> { }
     // Method which gets overwritten by RegUser:
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public async showTakenQuestionaireStatistics(): Promise<void> { }
     // Method which gets overwritten by RegUser:
-    public showCreatedQuestionairesStatistics() { }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    public showCreatedQuestionairesStatistics(): void { }
 }
 

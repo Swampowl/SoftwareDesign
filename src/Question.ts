@@ -51,17 +51,17 @@ export class Question {
 
     public showCreateQuestionStatistics(): void {
         let index: number = 0;
-        this.possibleAnswers.forEach(answer => {
-            console.log(`------>${index} ${answer.answer} ${answer.timesVoted}`);
-            index++;
-        })
+        this.possibleAnswers.forEach(function (answer): void {
+                console.log(`------------------> answer index:${index} || answer text ${answer.answer} || chosen times:${answer.timesVoted}`);
+                index++;
+            });
     }
 
     public async answer(): Promise<void> {
         let possiblAnswersAsStrings: string[] = Question.possibleAnswersToStrings(this.possibleAnswers);
 
 
-        let answer: number = await ConsoleHandling.showIndexPossibilities(possiblAnswersAsStrings, this.questionTitle)
+        let answer: number = await ConsoleHandling.showIndexPossibilities(possiblAnswersAsStrings, this.questionTitle);
 
         let chosenAnswer: PossibleAnswer = this.possibleAnswers[answer];
 

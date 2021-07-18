@@ -1,6 +1,4 @@
-import { resolve } from 'path';
 import * as readline from 'readline';
-import { convertToObject } from 'typescript';
 
 class ConsoleHandling {
   private static instance: ConsoleHandling = new ConsoleHandling()
@@ -20,9 +18,10 @@ class ConsoleHandling {
   }
 
   public static getInstance(): ConsoleHandling {
-    return ConsoleHandling.instance
+    return ConsoleHandling.instance;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public debugTwo(message: any, secondMessage: any): void {
     console.log(message);
     console.log(secondMessage);
@@ -32,12 +31,12 @@ class ConsoleHandling {
   public async question(question: string): Promise<string> {
     this.printInput("");
     let answer: string = "";
-    let answerPromise: string = await new Promise((resolve) => {
+    let answerPromise: string = await new Promise((resolve): void => {
       this.consoleLine.question(question.toString(), (_answer: string) => {
         answer = _answer;
         resolve(answer);
 
-      })
+      });
     });
 
     if (answerPromise.toLocaleLowerCase() == "exit") {
@@ -57,7 +56,7 @@ class ConsoleHandling {
 
       this.consoleLine.write(`->>${index}<<-  <--->  ${possibility}`);
 
-      this.consoleLine.write("\n")
+      this.consoleLine.write("\n");
 
     }
 
@@ -69,7 +68,7 @@ class ConsoleHandling {
 
 
     if (!showPossibilities[+answerPromise]) {
-      console.log("invalid input! Please try again. Don't type in the full answer possibility, but rather the number next to it!")
+      console.log("invalid input! Please try again. Don't type in the full answer possibility, but rather the number next to it!");
       return await this.showIndexPossibilities(showPossibilities, question);
     }
 
@@ -77,6 +76,7 @@ class ConsoleHandling {
   }
 
   public async showPossibilities(showPossibilities: string[], question: string): Promise<string> {
+
 
     this.consoleLine.write("\n");
 
@@ -86,7 +86,7 @@ class ConsoleHandling {
 
       this.consoleLine.write(`${possibility}`);
 
-      this.consoleLine.write("\n")
+      this.consoleLine.write("\n");
 
     }
 

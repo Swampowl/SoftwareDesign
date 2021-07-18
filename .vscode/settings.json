@@ -1,5 +1,14 @@
 {
     "emmet.preferences": {
     
-    }
+    },
+    "json.schemas": [
+    {
+        "fileMatch": [
+            "/myfile"
+        ],
+        "url": "schemaURL"
+    },
+    "eslintrc.configFile":
+    ]
 }

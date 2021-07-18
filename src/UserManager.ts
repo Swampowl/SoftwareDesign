@@ -1,8 +1,8 @@
+/* eslint-disable no-case-declarations */
 import ConsoleHandling from "./ConsoleHandling";
 import { UnregUser } from "./UnregUser";
 import { LoginCredentials } from "./LoginCredentials";
 import FileHandler from "./FileHandler";
-import { PassThrough } from "stream";
 import { RegUser } from "./RegUser";
 import { DefaultDate } from "./DefaultDate";
 import { Questionarie } from "./Questionarie";
@@ -23,7 +23,7 @@ export class UserManager {
 
     public static questionarieDBToStringArray(): string[] {
         let strings: string[] = [];
-        UserManager.questionaireDB.forEach(quest => {
+        UserManager.questionaireDB.forEach(function (quest): void {
             strings.push(quest.title);
         });
         return strings;
@@ -34,7 +34,7 @@ export class UserManager {
         UserManager.readQuestDB();
     }
     public static writeAllDBs(): void {
-        
+
         UserManager.writeRegUserDB();
         UserManager.writetoQuestDB();
     }
@@ -69,27 +69,29 @@ export class UserManager {
         }
     }
 
-    public async getDate() {
+    public async getDate(): Promise<void> {
         let dateString: string = await ConsoleHandling.question("please type in the date in the following format: DD.MM.YYYY:  ");
         new DefaultDate(dateString);
     }
 
     private async loginQuestion(): Promise<void> {
-        console.log("Welcome to questionaire main menue.")
+        console.log('\x1b[32m', `Welcome to Questionaire App!`, '\x1b[0m', "\n What do you want to do?");
         let answer: string = await ConsoleHandling.showPossibilities(["<L> Login", "<R> Register", "<G> Continue as guest"], "Your Statement:");
 
         switch (answer.toUpperCase()) {
             case "L":
-
+                console.clear();
                 let regUser: RegUser = await this.getRegUser();
                 regUser.startMenue();
                 return;
             case "R":
+                console.clear();
                 await this.register();
                 break;
             case "G":
-                console.clear()
-                console.log('\x1b[33m', "You now continue as unregistrated User.", '\x1b[0m')
+
+                console.clear();
+                console.log('\x1b[33m', "You now continue as unregistrated User.", '\x1b[0m');
                 let unregUser: UnregUser = new UnregUser();
                 unregUser.startMenue();
                 return;
@@ -105,11 +107,11 @@ export class UserManager {
 
     private async getRegUser(): Promise<RegUser> {
         //console.clear();
-        ConsoleHandling.printInput("Please enter your login credentials to identify.")
+        ConsoleHandling.printInput("Please enter your login credentials to identify.");
         let usernameLogin: string = await ConsoleHandling.question("username: ");
         let passwordLogin: string = await ConsoleHandling.question("password: ");
 
-        let newLoginCredentials: LoginCredentials = new LoginCredentials(UserManager.regUserDB.length, usernameLogin, passwordLogin)
+        let newLoginCredentials: LoginCredentials = new LoginCredentials(UserManager.regUserDB.length, usernameLogin, passwordLogin);
 
         try {
             return this.getRegUserByLoginCredentials(newLoginCredentials);
@@ -127,12 +129,13 @@ export class UserManager {
 
 
     public getRegUserByLoginCredentials(inputLoginCredentials: LoginCredentials): RegUser {
-        for (let index = 0; index < UserManager.regUserDB.length; index++) {
+        for (let index: number = 0; index < UserManager.regUserDB.length; index++) {
             let currentRegUser: RegUser = UserManager.regUserDB[index];
 
             if (inputLoginCredentials.equalsRegUser(currentRegUser)) {
+                console.clear();
                 console.log("Login successful.");
-                console.log('\x1b[32m', "You are now logged in as registrated User!", '\x1b[0m');
+                console.log('\x1b[32m', `You are now logged in as ${currentRegUser.UserName}!`, '\x1b[0m');
                 return currentRegUser;
             }
         }
@@ -156,8 +159,8 @@ export class UserManager {
     private async register(): Promise<void> {
 
         //console.clear();
-        ConsoleHandling.printInput("To register for Questionaire App\nplease choose a username and password.\nkeep in mind that only numbers and letters are allowed.")
-        let usernameRegister: string = await ConsoleHandling.showPossibilities(["enter username here:"], "");
+        ConsoleHandling.printInput("You can now register to Questionaire App.\nPlease choose a username and password.\nKeep in mind that only numbers and letters are allowed.");
+        let usernameRegister: string = await ConsoleHandling.question("enter username here:");
 
         if (this.isRegisterUsernameTaken(usernameRegister)) {
             //console.clear();
@@ -165,13 +168,14 @@ export class UserManager {
             return;
         }
 
-        let passwordLogin: string = await ConsoleHandling.showPossibilities(["enter password here:"], "");
+        let passwordLogin: string = await ConsoleHandling.question("enter password here:");
 
         let userID: number = UserManager.regUserDB.length;
 
         let loginData: LoginCredentials = new LoginCredentials(userID, usernameRegister, passwordLogin);
+        console.clear();
 
-        console.log('\x1b[36m', "User " + usernameRegister + " was created. You are now successfully logged in!", '\x1b[0m');
+        console.log('\x1b[36m', "User " + usernameRegister + " was created. Returning to main menue!", '\x1b[0m');
 
         let newRegUser: RegUser = new RegUser(loginData);
 

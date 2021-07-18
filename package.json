@@ -7,7 +7,8 @@
     "start": "ts-node-dev --respawn --transpile-only ./src/Main.ts",
     "test": "jest",
     "debug": "tsc",
-    "build:prod": "webpack --mode=production --progress"
+    "build:prod": "webpack --mode=production --progress",
+    "lint": "eslint ./src --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -39,12 +40,6 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.31.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.5"

@@ -1,12 +1,6 @@
 import { Question } from "./Question";
-import { DefaultDate } from "./DefaultDate";
-import ConsoleHandling from "./ConsoleHandling";
-import { RegUser } from "./RegUser";
-import { PossibleAnswer } from "./PossibleAnswer";
-import { UnregUser } from "./UnregUser";
 import { DateArea } from "./DateArea";
-import { UserManager } from "./UserManager";
-import FileHandler from "./FileHandler";
+
 
 export class Questionarie {
 
@@ -25,11 +19,11 @@ export class Questionarie {
         timesQuestionarieTaken: number,
         author: string
     ) {
-        this.questionarieID = questionarieID
-        this.title = title
-        this.questions = questionarieQuestions
+        this.questionarieID = questionarieID;
+        this.title = title;
+        this.questions = questionarieQuestions;
         this.dateArea = dateArea;
-        this.timesQuestionarieTaken = timesQuestionarieTaken
+        this.timesQuestionarieTaken = timesQuestionarieTaken;
         this.author = author;
     }
 
@@ -53,11 +47,11 @@ export class Questionarie {
             dumb.author);
     }
 
-    public showCreatedQuestionaireStatistics() {
-        this.questions.forEach(question => {
-            console.log("----> " + question.questionTitle);
-            question.showCreateQuestionStatistics();
-        })
+    public showCreatedQuestionaireStatistics(): Promise<string> {
+        this.questions.forEach(function (question): void {
+                console.log("---------> Question: " + question.questionTitle);
+                question.showCreateQuestionStatistics();
+            });
     }
 
 
@@ -71,7 +65,7 @@ export class Questionarie {
 
         }
 
-        console.log("You have answered all questions in this questionaire.\nReturning to main menue.")
+        console.log("You have answered all questions in this questionaire.\nReturning to main menue.");
         this.timesQuestionarieTaken++;
     }
 }

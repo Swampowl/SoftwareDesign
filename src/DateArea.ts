@@ -1,4 +1,3 @@
-import { start } from "repl";
 import { DefaultDate } from "./DefaultDate";
 
 export class DateArea {
@@ -12,7 +11,7 @@ export class DateArea {
     }
 
 
-    public static dumbToSmart(dumb: DateArea) {
+    public static dumbToSmart(dumb: DateArea): Promise<DefaultDate> {
         let smartStartDate: DefaultDate = DefaultDate.dumbToSmart(dumb.startDate);
         let smartEndDate: DefaultDate = DefaultDate.dumbToSmart(dumb.endDate);
 
