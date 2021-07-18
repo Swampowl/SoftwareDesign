@@ -27,16 +27,16 @@ export class Questionarie {
         this.author = author;
     }
 
-    public static dumbToSmart(dumb: Questionarie): Questionarie {
+    public static makeExecutable(dumb: Questionarie): Questionarie {
 
         let dumbQuestions: Question[] = dumb.questions;
         let smartQuestions: Question[] = [];
 
         for (let questionIndex: number = 0; questionIndex < dumbQuestions.length; questionIndex++) {
-            smartQuestions.push(Question.dumbToSmart(dumbQuestions[questionIndex]));
+            smartQuestions.push(Question.makeExecutable(dumbQuestions[questionIndex]));
         }
 
-        let smartDateArea: DateArea = DateArea.dumbToSmart(dumb.dateArea);
+        let smartDateArea: DateArea = DateArea.makeExecutable(dumb.dateArea);
 
         return new Questionarie(
             dumb.questionarieID,

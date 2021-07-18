@@ -35,7 +35,7 @@ export class Question {
         return possibilityStrings;
     }
 
-    public static dumbToSmart(dumb: Question): Question {
+    public static makeExecutable(dumb: Question): Question {
 
         let dumbAnswerPossibilities: PossibleAnswer[] = dumb.possibleAnswers;
         let smartAnswerPossibilities: PossibleAnswer[] = [];

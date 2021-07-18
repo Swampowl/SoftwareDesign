@@ -11,9 +11,9 @@ export class DateArea {
     }
 
 
-    public static dumbToSmart(dumb: DateArea): Promise<DefaultDate> {
-        let smartStartDate: DefaultDate = DefaultDate.dumbToSmart(dumb.startDate);
-        let smartEndDate: DefaultDate = DefaultDate.dumbToSmart(dumb.endDate);
+    public static makeExecutable(dumb: DateArea): Promise<DefaultDate> {
+        let smartStartDate: DefaultDate = DefaultDate.makeExecutable(dumb.startDate);
+        let smartEndDate: DefaultDate = DefaultDate.makeExecutable(dumb.endDate);
 
         return new DateArea(smartStartDate, smartEndDate);
     }

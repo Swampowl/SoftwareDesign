@@ -25,7 +25,7 @@ export class DefaultDate {
         return new DefaultDate(`${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`);
     }
 
-    public static dumbToSmart(dumb: DefaultDate): DefaultDate {
+    public static makeExecutable(dumb: DefaultDate): DefaultDate {
         return new DefaultDate(`${dumb.day}.${dumb.month}.${dumb.year}`);
     }
 

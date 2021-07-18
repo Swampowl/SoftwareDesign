@@ -14,7 +14,7 @@ export class RegUser extends UnregUser {
     private loginCredentials: LoginCredentials;
     private createdQuestionaireIDs: number[] = [];
     testName: string;
-
+    minQuestions: number = 5;
     constructor(loginCredentials: LoginCredentials, takenQuestionaireIDs?: number[], createQuestionarieIDs?: number[]) {
         super(["view statistics of own questionaries", "create a new questionarie"], takenQuestionaireIDs);
 
@@ -30,8 +30,8 @@ export class RegUser extends UnregUser {
         return this.loginCredentials.username;
     }
 
-    public static dumbToSmart(dumbUser: RegUser): RegUser {
-        let smartLoginCredentials: LoginCredentials = LoginCredentials.dumbToSmart(dumbUser.loginCredentials);
+    public static makeExecutable(dumbUser: RegUser): RegUser {
+        let smartLoginCredentials: LoginCredentials = LoginCredentials.makeExecutable(dumbUser.loginCredentials);
 
         let smartUser: RegUser = new RegUser(smartLoginCredentials, dumbUser.takenQuestionaryIDs, dumbUser.createdQuestionaireIDs);
 
@@ -118,7 +118,7 @@ export class RegUser extends UnregUser {
                 let question: Question = await this.getQuestion(questions.length);
                 questions.push(question);
 
-                if (questions.length >= 5) {
+                if (questions.length >= this.minQuestions) {
                     console.log("You have given enough answers! If you want to finish, write: done");
                 }
             }
@@ -141,8 +141,8 @@ export class RegUser extends UnregUser {
 
         if (question == "done") {
 
-            //KEINE MAGIC NUMBERS! FLO SCHREIB SIE ALS OBJEKTATTRIBUT ODER KLASSENATTRIBUT MIT VERNÜNFTIGEM NAMEN
-            if (amountQuestions < 5) {
+
+            if (amountQuestions < this.minQuestions) {
 
                 console.log("you must have at least 5 possible questions!");
                 return await this.getQuestion(amountQuestions);

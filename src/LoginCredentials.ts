@@ -11,7 +11,7 @@ export class LoginCredentials {
         this.password = password;
     }
 
-    static dumbToSmart(dumbCredentials: LoginCredentials): LoginCredentials {
+    static makeExecutable(dumbCredentials: LoginCredentials): LoginCredentials {
         return new LoginCredentials(dumbCredentials.userID, dumbCredentials.username, dumbCredentials.password);
     }
     
