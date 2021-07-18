@@ -15,16 +15,16 @@ export class LoginCredentials {
         return new LoginCredentials(inanelyCredentials.userID, inanelyCredentials.username, inanelyCredentials.password);
     }
     
-    public equals(_second: LoginCredentials): boolean {
+    public equals(nextLogin: LoginCredentials): boolean {
 
-        if (this.username == _second.username && this.password == _second.password) {
+        if (this.username == nextLogin.username && this.password == nextLogin.password) {
             return true;
         }
 
         return false;
     }
 
-    public equalsRegUser(_regUser: RegUser): boolean {
-        return this.equals(_regUser.LoginCredentials);
+    public equalsRegUser(regUser: RegUser): boolean {
+        return this.equals(regUser.LoginCredentials);
     }
 }

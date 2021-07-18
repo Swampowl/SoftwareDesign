@@ -124,9 +124,11 @@ export class UnregUser {
 
         let questsAsString: string[] = UserManager.questionarieDBToStringArray();
         console.log('\x1b[32m', `Please select one of following 10 questionaries.`, '\x1b[0m');
+
         let answer: number = await ConsoleHandling.showIndexPossibilities(questsAsString, `please type in the quesionaire index you want to select`);
 
         selectedQuest = UserManager.questionaireDB[+answer];
+
 
         await this.takePartAtQuestionaire(selectedQuest);
 

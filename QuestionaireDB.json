@@ -1,1 +1,524 @@
-[{"questionarieID":0,"title":"has","questions":[{"possibleAnswers":[{"answer":"s","timesVoted":0},{"answer":"s","timesVoted":0},{"answer":"s","timesVoted":0},{"answer":"s","timesVoted":0},{"answer":"s","timesVoted":0}],"questionTitle":"s"},{"possibleAnswers":[{"answer":"doasdasdfas","timesVoted":0},{"answer":"sdgsdfhsdfhsdfh","timesVoted":0},{"answer":"dafgdafgadfgasdf","timesVoted":0}],"questionTitle":"asdadasdfsadf"},{"possibleAnswers":[{"answer":"dwrewerwtsr","timesVoted":0},{"answer":"dqweqwe","timesVoted":0}],"questionTitle":"sdfsdf"},{"possibleAnswers":[{"answer":"dfghdfhsdfh","timesVoted":0},{"answer":"dione","timesVoted":0}],"questionTitle":"sdsfdasdfsdaf"},{"possibleAnswers":[{"answer":"asdsdfasgdsadg","timesVoted":0},{"answer":"sadfasdadg","timesVoted":0}],"questionTitle":"asdfasdgasdgsadf"}],"dateArea":{"startDate":{"day":18,"month":7,"year":2021},"endDate":{"day":20,"month":7,"year":2021}},"timesQuestionarieTaken":0,"author":"lol"}]
+[
+    {
+        "questionarieID": 0,
+        "title": "Furtwangen",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "no",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Do you like Furtwangen"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Cegos",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "Engel",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Which bar do you prefer?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "900m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "-20m",
+                        "timesVoted": 1
+                    },
+                    {
+                        "answer": "420m",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Whats Furtwangens altitude?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "10km",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "350km",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "How far is the beautiful city of Munich away?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "3 Churchres within 500m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "there is nothing annoying here",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Whats the most annoying in Furtwangen?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 18,
+                "month": 7,
+                "year": 2021
+            },
+            "endDate": {
+                "day": 27,
+                "month": 7,
+                "year": 2022
+            }
+        },
+        "timesQuestionarieTaken": 1,
+        "author": "admin"
+    },
+    {
+        "questionarieID": 1,
+        "title": "Softwaredesign",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes, but the exam killed my last nerves this year",
+                        "timesVoted": 4
+                    },
+                    {
+                        "answer": "no, its just not my kind of thing",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Did u like the Softwaredesign exam?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "ForEach & concat",
+                        "timesVoted": 4
+                    },
+                    {
+                        "answer": "no, nothing",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Did you implement Higher-Functions?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "just another dislike subject like maths.",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "i liked it, most importantly i learnd things i will need in the future",
+                        "timesVoted": 5
+                    }
+                ],
+                "questionTitle": "How do you feel about Softwaredesign?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Yes, always calm & professional but personal at the same time",
+                        "timesVoted": 4
+                    },
+                    {
+                        "answer": "no!!!!",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "Do you think the teacher did a good job?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "6",
+                        "timesVoted": 4
+                    },
+                    {
+                        "answer": "3",
+                        "timesVoted": 1
+                    }
+                ],
+                "questionTitle": "whats 0110 in decimal?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 18,
+                "month": 7,
+                "year": 2020
+            },
+            "endDate": {
+                "day": 27,
+                "month": 7,
+                "year": 2022
+            }
+        },
+        "timesQuestionarieTaken": 5,
+        "author": "swampowl"
+    },
+    {
+        "questionarieID": 2,
+        "title": "TestDummyQuest1",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "no",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Do you like Furtwangen"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Cegos",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "Engel",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Which bar do you prefer?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "900m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "-20m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "420m",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Whats Furtwangens altitude?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "10km",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "350km",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "How far is the beautiful city of Munich away?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "3 Churchres within 500m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "there is nothing annoying here",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Whats the most annoying in Furtwangen?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 18,
+                "month": 7,
+                "year": 2021
+            },
+            "endDate": {
+                "day": 27,
+                "month": 7,
+                "year": 2022
+            }
+        },
+        "timesQuestionarieTaken": 0,
+        "author": "admin"
+    },
+    {
+        "questionarieID": 3,
+        "title": "QuestionaireWithInvalidTimestamp",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes, but the exam killed my last nerves this year",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no, its just not my kind of thing",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Did u like the Softwaredesign exam?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "ForEach & concat",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no, nothing",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Did you implement Higher-Functions?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "just another dislike subject like maths.",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "i liked it, most importantly i learnd things i will need in the future",
+                        "timesVoted": 3
+                    }
+                ],
+                "questionTitle": "How do you feel about Softwaredesign?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Yes, always calm & professional but personal at the same time",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no!!!!",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Do you think the teacher did a good job?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "6",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "3",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "whats 0110 in decimal?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 14,
+                "month": 7,
+                "year": 2020
+            },
+            "endDate": {
+                "day": 16,
+                "month": 7,
+                "year": 2021
+            }
+        },
+        "timesQuestionarieTaken": 3,
+        "author": "swampowl"
+    },
+    {
+        "questionarieID": 4,
+        "title": "TestQuest12345",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "no",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Do you like Furtwangen"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Cegos",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "Engel",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Which bar do you prefer?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "900m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "-20m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "420m",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Whats Furtwangens altitude?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "10km",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "350km",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "How far is the beautiful city of Munich away?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "3 Churchres within 500m",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "there is nothing annoying here",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Whats the most annoying in Furtwangen?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 18,
+                "month": 7,
+                "year": 2021
+            },
+            "endDate": {
+                "day": 27,
+                "month": 7,
+                "year": 2022
+            }
+        },
+        "timesQuestionarieTaken": 0,
+        "author": "admin"
+    },
+    {
+        "questionarieID": 5,
+        "title": "QuestTest2132342352345",
+        "questions": [
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "yes, but the exam killed my last nerves this year",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no, its just not my kind of thing",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Did u like the Softwaredesign exam?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "ForEach & concat",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no, nothing",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Did you implement Higher-Functions?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "just another dislike subject like maths.",
+                        "timesVoted": 0
+                    },
+                    {
+                        "answer": "i liked it, most importantly i learnd things i will need in the future",
+                        "timesVoted": 3
+                    }
+                ],
+                "questionTitle": "How do you feel about Softwaredesign?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "Yes, always calm & professional but personal at the same time",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "no!!!!",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "Do you think the teacher did a good job?"
+            },
+            {
+                "possibleAnswers": [
+                    {
+                        "answer": "6",
+                        "timesVoted": 3
+                    },
+                    {
+                        "answer": "3",
+                        "timesVoted": 0
+                    }
+                ],
+                "questionTitle": "whats 0110 in decimal?"
+            }
+        ],
+        "dateArea": {
+            "startDate": {
+                "day": 18,
+                "month": 7,
+                "year": 2020
+            },
+            "endDate": {
+                "day": 27,
+                "month": 7,
+                "year": 2022
+            }
+        },
+        "timesQuestionarieTaken": 3,
+        "author": "swampowl"
+    }
+]

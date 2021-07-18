@@ -47,11 +47,14 @@ export class Questionarie {
             inanely.author);
     }
 
-    public showCreatedQuestionaireStatistics(): Promise<string> {
+    public showCreatedQuestionaireStatistics(): Promise<void> {
+        console.log("Number of People who took part: " + this.timesQuestionarieTaken);
         this.questions.forEach(function (question): void {
-                console.log("---------> Question: " + question.questionTitle + "Number of People who took part: " + "######");
-                question.showCreateQuestionStatistics();
-            });
+            console.log("---------> Question: " + question.questionTitle);
+            question.showCreateQuestionStatistics();
+
+        });
+        return;
     }
 
 

@@ -1,7 +1,7 @@
 <u style="font-size:30px"> Softwaredesign Endabgabe </u><br>
 <br><u>HigerFunctions implementiert:</u>
-<br>1. ForEach
-<br> ???
+<br>1. ForEach: iteriert bis um ende durch. ignoriert errors.
+<br>2. concat: fügt 2 arrays zu einem zusammen.
 <br>
 <br>
 <br><u>DesignPatterns:</u>

@@ -11,18 +11,18 @@ export class DateArea {
     }
 
 
-    public static makeExecutable(inanely: DateArea): Promise<DefaultDate> {
+    public static makeExecutable(inanely: DateArea): DateArea {
         let smartStartDate: DefaultDate = DefaultDate.makeExecutable(inanely.startDate);
         let smartEndDate: DefaultDate = DefaultDate.makeExecutable(inanely.endDate);
 
         return new DateArea(smartStartDate, smartEndDate);
     }
 
-    public wraps(_date: DefaultDate | Date): boolean {
+    public wraps(dateNew: DefaultDate | Date): boolean {
         let defaultDate: DefaultDate;
 
-        if (_date instanceof Date) {
-            defaultDate = DefaultDate.dateToDefaultDate(_date);
+        if (dateNew instanceof Date) {
+            defaultDate = DefaultDate.dateToDefaultDate(dateNew);
         }
 
         if (defaultDate.isBefore(this.startDate)) {

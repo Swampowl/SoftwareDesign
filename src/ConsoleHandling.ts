@@ -54,10 +54,10 @@ class ConsoleHandling {
     for (let index: number = 0; index < showPossibilities.length; index++) {
 
       let possibility: string = showPossibilities[index];
-
       this.consoleLine.write(`->>${index}<<-  <--->  ${possibility}`);
 
       this.consoleLine.write("\n");
+
 
     }
 

@@ -13,23 +13,23 @@ export class Question {
         this.possibleAnswers = answerPossibilities;
     }
 
-    public static stringsToPossibleAnswers(_possibilityStrings: string[]): PossibleAnswer[] {
+    public static stringsToPossibleAnswers(possibilityStrings: string[]): PossibleAnswer[] {
 
         let answerPossibilities: PossibleAnswer[] = [];
 
-        for (let index: number = 0; index < _possibilityStrings.length; index++) {
-            answerPossibilities.push(new PossibleAnswer(_possibilityStrings[index], 0));
+        for (let index: number = 0; index < possibilityStrings.length; index++) {
+            answerPossibilities.push(new PossibleAnswer(possibilityStrings[index], 0));
         }
 
         return answerPossibilities;
     }
 
-    public static possibleAnswersToStrings(_answerPossibilities: PossibleAnswer[]): string[] {
+    public static possibleAnswersToStrings(answerPossibilities: PossibleAnswer[]): string[] {
 
         let possibilityStrings: string[] = [];
 
-        for (let index: number = 0; index < _answerPossibilities.length; index++) {
-            possibilityStrings.push(_answerPossibilities[index].answer);
+        for (let index: number = 0; index < answerPossibilities.length; index++) {
+            possibilityStrings.push(answerPossibilities[index].answer);
         }
 
         return possibilityStrings;

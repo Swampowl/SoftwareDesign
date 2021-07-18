@@ -15,6 +15,7 @@ export class RegUser extends UnregUser {
     private createdQuestionaireIDs: number[] = [];
     testName: string;
     minQuestions: number = 5;
+    minAnswers: number = 2;
     constructor(loginCredentials: LoginCredentials, takenQuestionaireIDs?: number[], createQuestionarieIDs?: number[]) {
         super(["view statistics of own questionaries", "create a new questionarie"], takenQuestionaireIDs);
 
@@ -41,15 +42,15 @@ export class RegUser extends UnregUser {
         return smartUser;
     }
 
-    public async getDate(_startEndDefinition: string): Promise<DefaultDate> {
-        let dateString: string = await ConsoleHandling.question(`Type in ${_startEndDefinition} date in format: DD.MM.YYYY:  `);
+    public async getDate(startEndDefinition: string): Promise<DefaultDate> {
+        let dateString: string = await ConsoleHandling.question(`Type in ${startEndDefinition} date in format: DD.MM.YYYY:  `);
 
         try {
             return new DefaultDate(dateString);
 
         } catch (error) {
             console.log(error.message);
-            return await this.getDate(_startEndDefinition);
+            return await this.getDate(startEndDefinition);
         }
     }
 
@@ -86,7 +87,6 @@ export class RegUser extends UnregUser {
     }
 
     private async getDateArea(): Promise<DateArea> {
-        return new DateArea(new DefaultDate("18.07.2021"), new DefaultDate("20.07.2021"));
         let questionarieStart: DefaultDate = await this.getDate("start");
 
 
@@ -121,7 +121,7 @@ export class RegUser extends UnregUser {
                 let question: Question = await this.getQuestion(questions.length);
                 questions.push(question);
 
-                if (questions.length >= this.minQuestions) {
+                if (questions.length > this.minAnswers) {
                     console.log("You have given enough answers! If you want to finish, write: done");
                 }
             }
@@ -184,7 +184,7 @@ export class RegUser extends UnregUser {
     }
 
     private async getAnswer(amountAnswers: number): Promise<string> {
-        let answer: string = await ConsoleHandling.question("Enter your next answerPossibility here: ");
+        let answer: string = await ConsoleHandling.question("Enter your next answer Possibility here: ");
 
         if (answer == "done") {
             if (amountAnswers < 2) {
