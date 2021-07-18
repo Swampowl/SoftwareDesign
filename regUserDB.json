@@ -1,1 +1,22 @@
-[{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":0,"username":"TestDummy","password":"DummyPW123"}},{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":1,"username":"admin","password":"admin123"}},{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":2,"username":"TestUser","password":"Test123"}},{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":3,"username":"Swampowl","password":"Swampowl"}},{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":4,"username":"user","password":"user"}},{"initalStartOptions":["select from ten questionaries","search questionarie by name","show taken questionaires","view statistics of own questionaries","create a new questionarie"],"takenQuestionaryIDs":[],"isRegistratedUser":true,"loginCredentials":{"userID":5,"username":"hans","password":"hans"}}]
+[
+    {
+        "initalStartOptions": [
+            "select from ten questionaries",
+            "search questionarie by name",
+            "show taken questionaires",
+            "view statistics of own questionaries",
+            "create a new questionarie"
+        ],
+        "takenQuestionaryIDs": [],
+        "isRegistratedUser": true,
+        "createdQuestionaireIDs": [
+            0
+        ],
+        "minQuestions": 5,
+        "loginCredentials": {
+            "userID": 0,
+            "username": "lol",
+            "password": "lol"
+        }
+    }
+]

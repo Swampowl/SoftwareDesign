@@ -49,7 +49,7 @@ export class Questionarie {
 
     public showCreatedQuestionaireStatistics(): Promise<string> {
         this.questions.forEach(function (question): void {
-                console.log("---------> Question: " + question.questionTitle);
+                console.log("---------> Question: " + question.questionTitle + "Number of People who took part: " + "######");
                 question.showCreateQuestionStatistics();
             });
     }

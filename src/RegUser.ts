@@ -19,7 +19,10 @@ export class RegUser extends UnregUser {
         super(["view statistics of own questionaries", "create a new questionarie"], takenQuestionaireIDs);
 
         this.loginCredentials = loginCredentials;
-        this.createdQuestionaireIDs = createQuestionarieIDs;
+
+        if (createQuestionarieIDs) {
+            this.createdQuestionaireIDs = createQuestionarieIDs;
+        }
     }
 
     get LoginCredentials(): LoginCredentials {
